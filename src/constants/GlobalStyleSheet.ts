@@ -1,5 +1,12 @@
 import { StyleSheet } from 'react-native';
+import { colorList } from './ColorList';
 
+
+export const colors = {
+	...colorList,
+	PRIMARY: colorList.BLUE6,
+	PRIMARY_LIGHT: colorList.BLUE8
+}
 
 export const globalStyles = StyleSheet.create({
   	// Typograhpy
@@ -11,7 +18,7 @@ export const globalStyles = StyleSheet.create({
 	nunitoSansTitle2: {
 		fontFamily: "NunitoSans_700Bold",
 		fontSize: 48,
-		lineHeight: 56,
+		lineHeight: 56,				
 	},
 	nunitoSansTitle3: {
 		fontFamily: "NunitoSans_800ExtraBold",

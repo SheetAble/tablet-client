@@ -13,7 +13,7 @@ import {
   selectVersion,
 } from "../redux/slicers/userList/userListSlice";
 import { useAppDispatch, useAppSelector } from "../redux/store";
-import { globalStyles}  from "../constants/GlobalStyleSheet"
+import { colors, globalStyles}  from "../constants/GlobalStyleSheet"
 
 export function UserList() {
   const userlist = useAppSelector(selectUserList);

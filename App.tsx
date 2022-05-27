@@ -33,8 +33,6 @@ import {
   Vollkorn_900Black_Italic 
 } from '@expo-google-fonts/vollkorn'
 
-
-
 export default function App() {
   let [fontsLoaded] = useFonts({
     NunitoSans_200ExtraLight,
