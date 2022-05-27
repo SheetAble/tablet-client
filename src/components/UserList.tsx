@@ -6,14 +6,15 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { addUser, selectUserList } from '../redux/slicers/userList/userListSlice';
+import { addUser, getVersionAsync, selectUserList, selectVersion } from '../redux/slicers/userList/userListSlice';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 
 export function UserList ()  {
 	
 	const userlist = useAppSelector(selectUserList)
+	const version = useAppSelector(selectVersion)
 	const dispatch = useAppDispatch();
-
+	
 	const list = () => {
 		return userlist.map((user) => {
 		return (
@@ -36,7 +37,11 @@ export function UserList ()  {
 					name: "Valle",
 					age: 21
 				}))}/>
+				<Button title='Get Version' onPress={() => dispatch(getVersionAsync())}/>
 			</View>
+			<Text>
+				{version}
+			</Text>
 			<Text style={styles.text}>
 				{list()}	
 			</Text>
@@ -52,7 +57,7 @@ const styles = StyleSheet.create({
 	},
 	conWrap: {
 		flexDirection: "row",
-		width: "30%",
+		width: "40%",
 		height: "40%",
 		alignItems: "center",
 		justifyContent: 'space-between', 
