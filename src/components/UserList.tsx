@@ -13,7 +13,7 @@ import {
   selectVersion,
 } from "../redux/slicers/userList/userListSlice";
 import { useAppDispatch, useAppSelector } from "../redux/store";
-import { colors, globalStyles}  from "../constants/GlobalStyleSheet"
+import { colors, globalStyles } from "../constants/GlobalStyleSheet";
 
 export function UserList() {
   const userlist = useAppSelector(selectUserList);
@@ -35,7 +35,7 @@ export function UserList() {
   return (
     <View style={styles.userListWrapper}>
       <View style={styles.conWrap}>
-        <Text style={[styles.text]} >Hdaello</Text>
+        <Text style={[styles.text]}>Hdaello</Text>
         <Button
           title="Create User"
           onPress={() =>

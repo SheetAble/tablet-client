@@ -3,9 +3,9 @@ import CounterApp from "./src/CounterApp";
 import { store } from "./src/redux/store";
 import { View, Text } from "react-native";
 
-import { useFonts } from 'expo-font';
+import { useFonts } from "expo-font";
 
-import { 
+import {
   NunitoSans_200ExtraLight,
   NunitoSans_200ExtraLight_Italic,
   NunitoSans_300Light,
@@ -19,10 +19,10 @@ import {
   NunitoSans_800ExtraBold,
   NunitoSans_800ExtraBold_Italic,
   NunitoSans_900Black,
-  NunitoSans_900Black_Italic 
-} from '@expo-google-fonts/nunito-sans'
+  NunitoSans_900Black_Italic,
+} from "@expo-google-fonts/nunito-sans";
 
-import { 
+import {
   Vollkorn_400Regular,
   Vollkorn_400Regular_Italic,
   Vollkorn_600SemiBold,
@@ -30,8 +30,8 @@ import {
   Vollkorn_700Bold,
   Vollkorn_700Bold_Italic,
   Vollkorn_900Black,
-  Vollkorn_900Black_Italic 
-} from '@expo-google-fonts/vollkorn'
+  Vollkorn_900Black_Italic,
+} from "@expo-google-fonts/vollkorn";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -56,7 +56,7 @@ export default function App() {
     Vollkorn_700Bold,
     Vollkorn_700Bold_Italic,
     Vollkorn_900Black,
-    Vollkorn_900Black_Italic
+    Vollkorn_900Black_Italic,
   });
 
   if (!fontsLoaded) {
@@ -64,9 +64,9 @@ export default function App() {
       <View>
         <Text>Loading</Text>
       </View>
-    )
+    );
   }
-  
+
   return (
     <Provider store={store}>
       <CounterApp />
