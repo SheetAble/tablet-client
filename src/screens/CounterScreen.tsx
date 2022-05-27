@@ -8,6 +8,8 @@
  * @format
  */
 
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
 import {
   SafeAreaView,
@@ -16,6 +18,7 @@ import {
   View,
   Text,
   StatusBar,
+  Button
 } from "react-native";
 
 import {
@@ -24,19 +27,24 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from "react-native/Libraries/NewAppScreen";
-import { Counter } from "./components/Counter";
-import { UserList } from "./components/UserList";
+import { Counter } from "../components/Counter";
+import { UserList } from "../components/UserList";
+import { RootStackParamList } from "./RootStackParams";
 
-declare const global: { HermesInternal: null | {} };
 
-const CounterApp = () => {
+type counterScreenProp = NativeStackNavigationProp<RootStackParamList, 'Counter'>;
+
+const CounterScreen = () => {
+  const navigation = useNavigation<counterScreenProp>();
+
   return (
     <>
       <SafeAreaView>
-        <UserList />
+        <UserList navigation={navigation}/>
+       
       </SafeAreaView>
     </>
   );
 };
 
-export default CounterApp;
+export default CounterScreen;

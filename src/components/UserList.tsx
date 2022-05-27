@@ -14,8 +14,18 @@ import {
 } from "../redux/slicers/userList/userListSlice";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import { colors, globalStyles } from "../constants/GlobalStyleSheet";
+import { NavigationProp } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../screens/RootStackParams";
 
-export function UserList() {
+
+type counterScreenProp = NativeStackNavigationProp<RootStackParamList, 'Counter'>;
+
+interface AppProps  {
+  navigation: counterScreenProp
+}
+
+export function UserList({ navigation }: AppProps) {
   const userlist = useAppSelector(selectUserList);
   const version = useAppSelector(selectVersion);
   const dispatch = useAppDispatch();
@@ -36,6 +46,10 @@ export function UserList() {
     <View style={styles.userListWrapper}>
       <View style={styles.conWrap}>
         <Text style={[styles.text]}>Hdaello</Text>
+         <Button
+          title="Go to Home"
+          onPress={() => navigation.navigate('Home')}
+        />
         <Button
           title="Create User"
           onPress={() =>
@@ -66,7 +80,7 @@ const styles = StyleSheet.create({
   },
   conWrap: {
     flexDirection: "row",
-    width: "40%",
+    width: "60%",
     height: "40%",
     alignItems: "center",
     justifyContent: "space-between",

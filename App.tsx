@@ -1,65 +1,24 @@
 import { Provider } from "react-redux";
-import CounterApp from "./src/CounterApp";
 import { store } from "./src/redux/store";
-import { View, Text } from "react-native";
+import { View, Text, Button } from "react-native";
+import { NavigationContainer } from '@react-navigation/native';
+import { loadFonts } from "./src/utils/loadFonts";
+import HomeScreen from "./src/screens/HomeScreen";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import CounterScreen from "./src/screens/CounterScreen";
+import ComposersScreen from "./src/screens/ComposersScreen";
+import SheetsScreen from "./src/screens/SheetsScreen";
+import SettingsScreen from "./src/screens/SettingsScreen";
+import CollectionsScreen from "./src/screens/CollectionsScreen";
+import { HomeIconSvg } from "./src/icons/HomeIconSvg";
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Ionicons from "react-native-vector-icons/Ionicons"
+import { colors, globalStyles } from "./src/constants/GlobalStyleSheet";
 
-import { useFonts } from "expo-font";
-
-import {
-  NunitoSans_200ExtraLight,
-  NunitoSans_200ExtraLight_Italic,
-  NunitoSans_300Light,
-  NunitoSans_300Light_Italic,
-  NunitoSans_400Regular,
-  NunitoSans_400Regular_Italic,
-  NunitoSans_600SemiBold,
-  NunitoSans_600SemiBold_Italic,
-  NunitoSans_700Bold,
-  NunitoSans_700Bold_Italic,
-  NunitoSans_800ExtraBold,
-  NunitoSans_800ExtraBold_Italic,
-  NunitoSans_900Black,
-  NunitoSans_900Black_Italic,
-} from "@expo-google-fonts/nunito-sans";
-
-import {
-  Vollkorn_400Regular,
-  Vollkorn_400Regular_Italic,
-  Vollkorn_600SemiBold,
-  Vollkorn_600SemiBold_Italic,
-  Vollkorn_700Bold,
-  Vollkorn_700Bold_Italic,
-  Vollkorn_900Black,
-  Vollkorn_900Black_Italic,
-} from "@expo-google-fonts/vollkorn";
+const Tab = createBottomTabNavigator()
 
 export default function App() {
-  let [fontsLoaded] = useFonts({
-    NunitoSans_200ExtraLight,
-    NunitoSans_200ExtraLight_Italic,
-    NunitoSans_300Light,
-    NunitoSans_300Light_Italic,
-    NunitoSans_400Regular,
-    NunitoSans_400Regular_Italic,
-    NunitoSans_600SemiBold,
-    NunitoSans_600SemiBold_Italic,
-    NunitoSans_700Bold,
-    NunitoSans_700Bold_Italic,
-    NunitoSans_800ExtraBold,
-    NunitoSans_800ExtraBold_Italic,
-    NunitoSans_900Black,
-    NunitoSans_900Black_Italic,
-    Vollkorn_400Regular,
-    Vollkorn_400Regular_Italic,
-    Vollkorn_600SemiBold,
-    Vollkorn_600SemiBold_Italic,
-    Vollkorn_700Bold,
-    Vollkorn_700Bold_Italic,
-    Vollkorn_900Black,
-    Vollkorn_900Black_Italic,
-  });
-
-  if (!fontsLoaded) {
+  if (!loadFonts()) {
     return (
       <View>
         <Text>Loading</Text>
@@ -69,7 +28,31 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <CounterApp />
+      <NavigationContainer>
+        <Tab.Navigator
+          screenOptions={{headerShown: false}}>
+          <Tab.Screen name="Home" component={HomeScreen} 
+          options= {{
+            tabBarLabel: ({focused} ) => (
+             <Text style={{
+               paddingLeft: 17,
+               paddingTop: 6,
+               color: focused ? colors.PRIMARY_LIGHT : colors.GRAY7, 
+               ...globalStyles.nunitoSansBodySmall
+             }}>Home</Text> 
+            ),
+            tabBarIcon: ({ focused, size }) => (
+            <Ionicons name="home" color={focused ? colors.PRIMARY_LIGHT : colors.GRAY7} size={size} outlined />
+          ),
+          }}/>
+          <Tab.Screen name="Sheets" component={SheetsScreen} />
+          <Tab.Screen name="Composers" component={CounterScreen} />
+          <Tab.Screen name="Collections" component={CollectionsScreen} />
+          <Tab.Screen name="Settings" component={SettingsScreen} />
+        </Tab.Navigator>
+      </NavigationContainer>
     </Provider>
   );
 }
+
+
