@@ -7,7 +7,6 @@ import {
   View,
 } from "react-native";
 import { useAppDispatch, useAppSelector } from "../redux/store";
-import { AsyncButton } from "./AsyncButton";
 import {
   decrement,
   increment,
@@ -57,15 +56,6 @@ export function Counter() {
           >
             <Text style={styles.buttonText}>Add Amount</Text>
           </TouchableOpacity>
-          <AsyncButton
-            style={styles.button}
-            disabled={status !== "idle"}
-            onPress={() =>
-              dispatch(incrementAsync(Number(incrementAmount) || 0))
-            }
-          >
-            <Text style={styles.buttonText}>Add Async</Text>
-          </AsyncButton>
         </View>
       </View>
     </View>
