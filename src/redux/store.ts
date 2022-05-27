@@ -1,14 +1,14 @@
-import {configureStore, ThunkAction, Action} from '@reduxjs/toolkit';
-import counterReducer from './slicers/counter/counterSlice';
-import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
-import userListSlice from './slicers/userList/userListSlice';
+import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import counterReducer from "./slicers/counter/counterSlice";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import userListSlice from "./slicers/userList/userListSlice";
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
-	userlist: userListSlice
+    userlist: userListSlice,
   },
-  devTools: true
+  devTools: true,
 });
 
 export type RootState = ReturnType<typeof store.getState>;

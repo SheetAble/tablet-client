@@ -8,7 +8,7 @@
  * @format
  */
 
-import React from 'react';
+import React from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -16,24 +16,23 @@ import {
   View,
   Text,
   StatusBar,
-} from 'react-native';
+} from "react-native";
 
 import {
   LearnMoreLinks,
   Colors,
   DebugInstructions,
   ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import {Counter} from './components/Counter';
-import { UserList } from './components/UserList';
+} from "react-native/Libraries/NewAppScreen";
+import { Counter } from "./components/Counter";
+import { UserList } from "./components/UserList";
 
-declare const global: {HermesInternal: null | {}};
+declare const global: { HermesInternal: null | {} };
 
 const CounterApp = () => {
   return (
     <>
       <SafeAreaView>
-        
         <UserList />
       </SafeAreaView>
     </>

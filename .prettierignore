@@ -1,0 +1,8 @@
+# Ignore artifacts:
+build
+coverage
+node_modules
+assets
+.expo_shared/
+.vscode
+.expo

@@ -1,13 +1,13 @@
-import {useRef, useEffect} from 'react';
-import {useWindowDimensions, Animated} from 'react-native';
+import { useRef, useEffect } from "react";
+import { useWindowDimensions, Animated } from "react-native";
 
 export const useViewportUnits = () => {
-  const {width, height} = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
 
   const vh = height / 100;
   const vw = width / 100;
 
-  return {vh, vw};
+  return { vh, vw };
 };
 
 export const useBounceAnimation = (value = 10) => {
@@ -31,7 +31,7 @@ export const useBounceAnimation = (value = 10) => {
           duration: 1500,
           useNativeDriver: true,
         }),
-      ]),
+      ])
     ).start();
   }, [bounce, value]);
 
