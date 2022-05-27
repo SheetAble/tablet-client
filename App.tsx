@@ -1,6 +1,6 @@
 import { Provider } from "react-redux";
 import CounterApp from "./src/CounterApp";
-import { store } from "./src/app/store";
+import { store } from "./src/redux/store";
 
 export default function App() {
   return (
