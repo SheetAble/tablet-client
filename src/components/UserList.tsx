@@ -18,11 +18,13 @@ import { NavigationProp } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../screens/RootStackParams";
 
+type counterScreenProp = NativeStackNavigationProp<
+  RootStackParamList,
+  "Counter"
+>;
 
-type counterScreenProp = NativeStackNavigationProp<RootStackParamList, 'Counter'>;
-
-interface AppProps  {
-  navigation: counterScreenProp
+interface AppProps {
+  navigation: counterScreenProp;
 }
 
 export function UserList({ navigation }: AppProps) {
@@ -46,9 +48,9 @@ export function UserList({ navigation }: AppProps) {
     <View style={styles.userListWrapper}>
       <View style={styles.conWrap}>
         <Text style={[styles.text]}>Hdaello</Text>
-         <Button
+        <Button
           title="Go to Home"
-          onPress={() => navigation.navigate('Home')}
+          onPress={() => navigation.navigate("Home")}
         />
         <Button
           title="Create User"

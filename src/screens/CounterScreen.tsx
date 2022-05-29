@@ -18,7 +18,7 @@ import {
   View,
   Text,
   StatusBar,
-  Button
+  Button,
 } from "react-native";
 
 import {
@@ -31,8 +31,10 @@ import { Counter } from "../components/Counter";
 import { UserList } from "../components/UserList";
 import { RootStackParamList } from "./RootStackParams";
 
-
-type counterScreenProp = NativeStackNavigationProp<RootStackParamList, 'Counter'>;
+type counterScreenProp = NativeStackNavigationProp<
+  RootStackParamList,
+  "Counter"
+>;
 
 const CounterScreen = () => {
   const navigation = useNavigation<counterScreenProp>();
@@ -40,8 +42,7 @@ const CounterScreen = () => {
   return (
     <>
       <SafeAreaView>
-        <UserList navigation={navigation}/>
-       
+        <UserList navigation={navigation} />
       </SafeAreaView>
     </>
   );
