@@ -24,5 +24,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     backgroundColor: colors.WHITESMOKE,
+    marginTop: 20,
+    marginLeft: 20,
   },
 });

@@ -10,7 +10,7 @@ export function TabScreenText({ focused, label }: TabScreenTextProps) {
   return (
     <Text
       style={{
-        paddingLeft: 23,
+        marginLeft: 23,
         paddingTop: 6,
         color: focused ? colors.PRIMARY_LIGHT : colors.GRAY7,
         ...globalStyles.nunitoSansBodySmall,

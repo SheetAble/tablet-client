@@ -34,6 +34,7 @@ export default function App() {
             headerShown: false,
             tabBarStyle: {
               borderTopWidth: 1,
+              backgroundColor: "white",
             },
           }}
         >
@@ -110,9 +111,9 @@ export default function App() {
               ),
               tabBarIcon: ({ focused, size }) => (
                 <Ionicons
-                  name="settings"
+                  name="cog"
                   color={focused ? colors.PRIMARY_LIGHT : colors.GRAY8}
-                  size={size}
+                  size={size + 5}
                 />
               ),
             }}
