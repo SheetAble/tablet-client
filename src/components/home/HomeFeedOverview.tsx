@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { globalSpace, globalStyles } from "../../constants/GlobalStyleSheet";
+import { globalStyles } from "../../constants/GlobalStyleSheet";
 import SearchBar from "../searchBar/SearchBar";
 
 export default function HomeFeedOverview() {
@@ -18,6 +18,7 @@ export default function HomeFeedOverview() {
 const styles = StyleSheet.create({
   mainWrapper: {
     flex: 1,
+    ...globalStyles.mr3,
   },
   overViewText: {
     ...globalStyles.vollkornTitle3,
