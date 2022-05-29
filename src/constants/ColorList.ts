@@ -101,5 +101,7 @@ export const colorList = {
   PURPLE9: "#f0c5fc",
   PURPLE10: "#f4d4fd",
   PURPLE11: "#f7e2fe",
-  PURPLE12: "#fbf1fe ",
+  PURPLE12: "#fbf1fe",
+
+  WHITESMOKE: "#F5F5F5"
 };

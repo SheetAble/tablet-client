@@ -30,7 +30,13 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Tab.Navigator
-          screenOptions={{headerShown: false}}>
+          screenOptions={{
+            headerShown: false,
+            tabBarStyle: {
+              borderTopWidth: 1
+            }
+          }}
+          >
           <Tab.Screen name="Home" component={HomeScreen} 
           options= {{
             tabBarLabel: ({focused} ) => (
