@@ -36,14 +36,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   searchIcon: {
-    padding: 7,
+    padding: 6,
   },
   input: {
     flex: 1,
-    paddingTop: 7,
-    paddingRight: 7,
-    paddingBottom: 7,
-    paddingLeft: 0,
     color: colors.GRAY2,
     ...globalStyles.vollkornBodySmall,
   },
