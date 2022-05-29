@@ -2,16 +2,16 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
 import { getSheetsAPICall } from "./dataAPI";
 
-type Sheet = {
+export type Sheet = {
   safeSheetName: string;
   sheetName: string;
   safeComposer: string;
   composer: string;
-  releaseDate: Date;
+  releaseDate: string;
   pdfUrl: string;
   uploaderId: number;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
   tags: string[];
   informationText: string;
 };
@@ -42,7 +42,7 @@ export const dataSlice = createSlice({
       })
       .addCase(getSheetsAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        //state.sheets = action.payload
+        state.sheets = action.payload;
       });
   },
 });
