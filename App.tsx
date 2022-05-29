@@ -14,10 +14,13 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { colors, globalStyles } from "./src/constants/GlobalStyleSheet";
 import { TabScreenText } from "./src/components/utils/TabScreenText";
+import axios from "axios";
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+  axios.defaults.baseURL = "http://192.168.178.71:8080/api";
+
   if (!loadFonts()) {
     return (
       <View>

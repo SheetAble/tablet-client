@@ -2,18 +2,16 @@ import axios from "axios";
 
 export async function loginAPICall() {
   try {
-    const { data, status } = await axios.post<string>(
-      "http://192.168.0.52:8080/api/login",
-      {
-        email: "admin@admin.com",
-        password: "sheetable",
-      }
-    );
+    const { data, status } = await axios.post<string>("/login", {
+      email: "admin@admin.com",
+      password: "sheetable",
+    });
 
     if (status != 200) {
       return false;
     }
     axios.defaults.headers.common["Authorization"] = "Bearer " + data;
+
     return true;
   } catch (error) {
     if (axios.isAxiosError(error)) {

@@ -25,9 +25,7 @@ type GetSheetsResponse = {
 
 export async function getSheetsAPICall(): Promise<Sheet[]> {
   try {
-    const { data, status } = await axios.get<GetSheetsResponse>(
-      "http://192.168.0.52:8080/api/sheets"
-    );
+    const { data, status } = await axios.get<GetSheetsResponse>("/sheets");
 
     let sheets: Sheet[] = [];
     for (let i = 0; i < data.rows.length; i++) {

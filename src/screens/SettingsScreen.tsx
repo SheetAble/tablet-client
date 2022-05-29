@@ -11,7 +11,15 @@ export default function SettingsScreen() {
   const dispatch = useAppDispatch();
 
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    <View
+      style={{
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "space-between",
+        flexDirection: "row",
+        marginHorizontal: 100,
+      }}
+    >
       <Text>Settings Screen</Text>
       <Text>{authenticated ? "test" : "no test"}</Text>
       <Button title="login" onPress={() => dispatch(loginAsync())} />
