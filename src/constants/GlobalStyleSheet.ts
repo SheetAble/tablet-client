@@ -10,6 +10,19 @@ export const colors = {
 const spacingValues = [0, 5, 10, 20, 40];
 
 export const globalStyles = StyleSheet.create({
+  // General
+  shadowBox: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
+  },
+
   // Typograhpy
   nunitoSansTitle1: {
     fontFamily: "NunitoSans_700Bold",

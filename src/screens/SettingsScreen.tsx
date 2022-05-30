@@ -21,7 +21,7 @@ export default function SettingsScreen() {
       }}
     >
       <Text>Settings Screen</Text>
-      <Text>{authenticated ? "test" : "no test"}</Text>
+      <Text>{authenticated ? "authenticated" : "not authenticated"}</Text>
       <Button title="login" onPress={() => dispatch(loginAsync())} />
       <Button title="Get Sheets" onPress={() => dispatch(getSheetsAsync())} />
     </View>
