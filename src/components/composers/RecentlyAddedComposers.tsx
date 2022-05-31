@@ -14,12 +14,12 @@ export default function RecentlyAddedComposers() {
 
   return (
     <View style={styles.mainSection}>
-      <Text style={[globalStyles.vollkornHeadline, { marginLeft: 5 }]}>
+      <Text style={[globalStyles.vollkornHeadline, { marginLeft: 10 }]}>
         Recently Added Composers
       </Text>
       <ScrollView horizontal={true} style={styles.sheetsList}>
-        {composers.map((composer) => (
-          <ComposerCard composer={composer} />
+        {composers.map((composer, index) => (
+          <ComposerCard composer={composer} first={index == 0} />
         ))}
       </ScrollView>
     </View>

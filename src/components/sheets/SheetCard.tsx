@@ -11,7 +11,13 @@ import { Sheet } from "../../redux/slicers/data/dataSlice";
 import axios from "axios";
 import { colors, globalStyles } from "../../constants/GlobalStyleSheet";
 
-export default function SheetCard({ sheet }: { sheet: Sheet }) {
+export default function SheetCard({
+  sheet,
+  first,
+}: {
+  sheet: Sheet;
+  first: boolean;
+}) {
   // To remove shadow when button is pressed
   const [isPressed, setIsPressed] = useState(false);
 
@@ -25,6 +31,7 @@ export default function SheetCard({ sheet }: { sheet: Sheet }) {
         style={[
           styles.cardWrapper,
           isPressed && { shadowOpacity: 0.35, shadowRadius: 1.5 },
+          first && { marginLeft: 10 },
         ]}
       >
         <Image
@@ -52,7 +59,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    marginLeft: 5, // So the shadow has enough space
+    marginLeft: 10, // So the shadow has enough space
     ...globalStyles.mr3,
     ...globalStyles.mb3,
     ...globalStyles.mt2,

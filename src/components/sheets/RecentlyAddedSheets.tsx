@@ -11,12 +11,12 @@ export default function RecentlyAddedSheets() {
 
   return (
     <View style={styles.mainSection}>
-      <Text style={[globalStyles.vollkornHeadline, { marginLeft: 5 }]}>
+      <Text style={[globalStyles.vollkornHeadline, { marginLeft: 10 }]}>
         Recently Added Sheets
       </Text>
       <ScrollView horizontal={true} style={styles.sheetsList}>
-        {sheets.map((sheet) => (
-          <SheetCard sheet={sheet} />
+        {sheets.map((sheet, index) => (
+          <SheetCard sheet={sheet} first={index == 0} />
         ))}
       </ScrollView>
     </View>

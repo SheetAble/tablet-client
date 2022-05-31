@@ -13,7 +13,7 @@ export default function HomeFeedOverview() {
       <SearchBar />
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={{ marginLeft: -5 /* For the shadow of the cards*/ }}
+        style={{ marginLeft: -10 /* For the shadow of the cards*/ }}
       >
         <RecentlyAddedSheets />
         <RecentlyAddedComposers />
