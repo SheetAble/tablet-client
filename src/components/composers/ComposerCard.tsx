@@ -52,15 +52,15 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    marginLeft: 10,
+    marginLeft: 5, // So the shadow has enough space
     ...globalStyles.mr3,
     ...globalStyles.mb3,
     ...globalStyles.mt2,
     ...globalStyles.shadowBox,
   },
   thumbnailImage: {
-    height: 150,
-    width: 150,
+    height: 125,
+    width: 125,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },

@@ -11,7 +11,9 @@ export default function RecentlyAddedSheets() {
 
   return (
     <View style={styles.mainSection}>
-      <Text style={globalStyles.vollkornHeadline}>Recently Added Sheets</Text>
+      <Text style={[globalStyles.vollkornHeadline, { marginLeft: 5 }]}>
+        Recently Added Sheets
+      </Text>
       <ScrollView horizontal={true} style={styles.sheetsList}>
         {sheets.map((sheet) => (
           <SheetCard sheet={sheet} />
@@ -28,6 +30,5 @@ const styles = StyleSheet.create({
   sheetsList: {
     flexDirection: "row",
     flexWrap: "wrap",
-    marginLeft: -10, // To give the sheet card shadow enough space without placing too much on the left
   },
 });

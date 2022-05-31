@@ -14,7 +14,7 @@ export default function RecentlyAddedComposers() {
 
   return (
     <View style={styles.mainSection}>
-      <Text style={globalStyles.vollkornHeadline}>
+      <Text style={[globalStyles.vollkornHeadline, { marginLeft: 5 }]}>
         Recently Added Composers
       </Text>
       <ScrollView horizontal={true} style={styles.sheetsList}>
@@ -33,6 +33,5 @@ const styles = StyleSheet.create({
   sheetsList: {
     flexDirection: "row",
     flexWrap: "wrap",
-    marginLeft: -10, // To give the sheet card shadow enough space without placing too much on the left
   },
 });

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { globalStyles } from "../../constants/GlobalStyleSheet";
 import RecentlyAddedComposers from "../composers/RecentlyAddedComposers";
@@ -11,8 +11,13 @@ export default function HomeFeedOverview() {
       <Ionicons name="sync" size={20} />
       <Text style={styles.overViewText}>Overview</Text>
       <SearchBar />
-      <RecentlyAddedSheets />
-      <RecentlyAddedComposers />
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={{ marginLeft: -5 /* For the shadow of the cards*/ }}
+      >
+        <RecentlyAddedSheets />
+        <RecentlyAddedComposers />
+      </ScrollView>
     </View>
   );
 }
