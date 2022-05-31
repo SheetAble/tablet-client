@@ -1,5 +1,5 @@
 import axios, { AxiosError } from "axios";
-import type { Sheet } from "./dataSlice";
+import type { Composer, Sheet } from "./dataSlice";
 
 type SheetResponse = {
   safe_sheet_name: string;
@@ -23,9 +23,22 @@ type GetSheetsResponse = {
   rows: SheetResponse[];
 };
 
+type ComposerResponse = {
+  safe_name: string;
+  name: string;
+  portrait_url: string;
+  epoch: string;
+  created_at: string;
+  updated_at: string;
+};
+
+type GetComposersResponse = {
+  rows: ComposerResponse[];
+};
+
 export async function getSheetsAPICall(): Promise<Sheet[]> {
   try {
-    const { data, status } = await axios.get<GetSheetsResponse>("/sheets");
+    const { data } = await axios.get<GetSheetsResponse>("/sheets");
 
     let sheets: Sheet[] = [];
     for (let i = 0; i < data.rows.length; i++) {
@@ -44,6 +57,34 @@ export async function getSheetsAPICall(): Promise<Sheet[]> {
       });
     }
     return sheets;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.log("error message: ", error.message);
+      console.log(error.cause);
+      return [];
+    } else {
+      console.log("unexpected error: ", error);
+      return [];
+    }
+  }
+}
+
+export async function getComposersAPICall(): Promise<Composer[]> {
+  try {
+    const { data } = await axios.get<GetComposersResponse>("/composers");
+
+    let composers: Composer[] = [];
+    for (let i = 0; i < data.rows.length; i++) {
+      composers.push({
+        safeName: data.rows[i].safe_name,
+        name: data.rows[i].name,
+        portraitUrl: data.rows[i].portrait_url,
+        epoch: data.rows[i].epoch,
+        createdAt: data.rows[i].created_at,
+        updatedAt: data.rows[i].updated_at,
+      });
+    }
+    return composers;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.log("error message: ", error.message);

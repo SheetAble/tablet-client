@@ -7,19 +7,19 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import React, { useState } from "react";
-import { Sheet } from "../../redux/slicers/data/dataSlice";
+import { Composer, Sheet } from "../../redux/slicers/data/dataSlice";
 import axios from "axios";
 import { colors, globalStyles } from "../../constants/GlobalStyleSheet";
 
-export default function SheetCard({ sheet }: { sheet: Sheet }) {
+export default function ComposerCard({ composer }: { composer: Composer }) {
   // To remove shadow when button is pressed
   const [isPressed, setIsPressed] = useState(false);
 
   return (
     <TouchableWithoutFeedback
-      key={sheet.safeSheetName}
       onPressIn={() => setIsPressed(true)}
       onPressOut={() => setIsPressed(false)}
+      key={composer.safeName}
     >
       <View
         style={[
@@ -29,16 +29,16 @@ export default function SheetCard({ sheet }: { sheet: Sheet }) {
       >
         <Image
           source={{
-            uri: `${axios.defaults.baseURL}/sheet/thumbnail/${sheet.safeSheetName}`,
+            uri: composer.portraitUrl,
           }}
           style={styles.thumbnailImage}
         />
         <View style={styles.textInfo}>
-          <Text numberOfLines={1} style={styles.sheetNameText}>
-            {sheet.sheetName}
-          </Text>
           <Text numberOfLines={1} style={styles.composerNameText}>
-            {sheet.composer}
+            {composer.name}
+          </Text>
+          <Text numberOfLines={1} style={styles.epochText}>
+            {composer.epoch}
           </Text>
         </View>
       </View>
@@ -59,8 +59,8 @@ const styles = StyleSheet.create({
     ...globalStyles.shadowBox,
   },
   thumbnailImage: {
-    height: 210 * 0.93,
-    width: 148 * 0.93,
+    height: 150,
+    width: 150,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },
@@ -68,12 +68,12 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     paddingBottom: 10,
   },
-  sheetNameText: {
+  composerNameText: {
     ...globalStyles.vollkornBodySmall,
     paddingTop: 2,
     maxWidth: 130, // So the text won't overflow
   },
-  composerNameText: {
+  epochText: {
     fontFamily: "Vollkorn_400Regular",
     fontSize: 10,
     color: colors.GRAY5,

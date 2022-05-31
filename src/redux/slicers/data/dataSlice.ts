@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
-import { getSheetsAPICall } from "./dataAPI";
+import { getComposersAPICall, getSheetsAPICall } from "./dataAPI";
 
 export type Sheet = {
   safeSheetName: string;
@@ -16,19 +16,35 @@ export type Sheet = {
   informationText: string;
 };
 
+export type Composer = {
+  safeName: string;
+  name: string;
+  portraitUrl: string;
+  epoch: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
 interface SheetsState {
   sheets: Sheet[];
+  composers: Composer[];
   status: "idle" | "loading" | "failed";
 }
 
 const initialState: SheetsState = {
   sheets: [],
+  composers: [],
   status: "idle",
 };
 
 export const getSheetsAsync = createAsyncThunk(
   "data/getSheets",
   getSheetsAPICall
+);
+
+export const getComposersAsync = createAsyncThunk(
+  "data/getComposers",
+  getComposersAPICall
 );
 
 export const dataSlice = createSlice({
@@ -43,6 +59,14 @@ export const dataSlice = createSlice({
       .addCase(getSheetsAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.sheets = action.payload;
+      })
+
+      .addCase(getComposersAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getComposersAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.composers = action.payload;
       });
   },
 });
@@ -50,6 +74,7 @@ export const dataSlice = createSlice({
 export const {} = dataSlice.actions;
 
 export const selectSheets = (state: RootState) => state.data.sheets;
+export const selectComposers = (state: RootState) => state.data.composers;
 export const selectDataStatus = (state: RootState) => state.data.status;
 
 export default dataSlice.reducer;

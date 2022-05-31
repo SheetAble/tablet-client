@@ -1,5 +1,8 @@
 import { Button, Text, View } from "react-native";
-import { getSheetsAsync } from "../redux/slicers/data/dataSlice";
+import {
+  getComposersAsync,
+  getSheetsAsync,
+} from "../redux/slicers/data/dataSlice";
 import {
   loginAsync,
   selectAuthenticated,
@@ -23,7 +26,13 @@ export default function SettingsScreen() {
       <Text>Settings Screen</Text>
       <Text>{authenticated ? "authenticated" : "not authenticated"}</Text>
       <Button title="login" onPress={() => dispatch(loginAsync())} />
-      <Button title="Get Sheets" onPress={() => dispatch(getSheetsAsync())} />
+      <Button
+        title="Get Data"
+        onPress={() => {
+          dispatch(getSheetsAsync());
+          dispatch(getComposersAsync());
+        }}
+      />
     </View>
   );
 }
