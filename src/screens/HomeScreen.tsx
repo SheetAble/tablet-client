@@ -12,12 +12,12 @@ export default function HomeScreen() {
   const navigation = useNavigation<homeScreenProp>();
 
   return (
-    <SafeAreaView style={styles.mainWrapper}>
+    <View style={styles.mainWrapper}>
       <View style={styles.margin}>
         <HomeFeedOverview />
         <DetailedPreview />
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 

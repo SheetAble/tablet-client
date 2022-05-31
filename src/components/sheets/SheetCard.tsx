@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    marginLeft: 10, // So the shadow has enough space
+
     ...globalStyles.mr3,
     ...globalStyles.mb3,
     ...globalStyles.mt2,
