@@ -10,6 +10,8 @@ import React, { useState } from "react";
 import { Composer, Sheet } from "../../redux/slicers/data/dataSlice";
 import axios from "axios";
 import { colors, globalStyles } from "../../constants/GlobalStyleSheet";
+import { useAppDispatch } from "../../redux/store";
+import { addDetailedPreview } from "../../redux/slicers/ui/uiSlice";
 
 export default function ComposerCard({
   composer,
@@ -20,10 +22,14 @@ export default function ComposerCard({
 }) {
   // To remove shadow when button is pressed
   const [isPressed, setIsPressed] = useState(false);
+  const dispatch = useAppDispatch();
 
   return (
     <TouchableWithoutFeedback
-      onPressIn={() => setIsPressed(true)}
+      onPressIn={() => {
+        setIsPressed(true);
+        dispatch(addDetailedPreview(composer));
+      }}
       onPressOut={() => setIsPressed(false)}
       key={composer.safeName}
     >

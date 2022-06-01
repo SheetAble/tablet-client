@@ -1,14 +1,34 @@
+import { useEffect } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { globalStyles } from "../../constants/GlobalStyleSheet";
+import {
+  getComposersAsync,
+  getSheetsAsync,
+} from "../../redux/slicers/data/dataSlice";
+import { useAppDispatch } from "../../redux/store";
 import RecentlyAddedComposers from "../composers/RecentlyAddedComposers";
 import SearchBar from "../searchBar/SearchBar";
 import RecentlyAddedSheets from "../sheets/RecentlyAddedSheets";
 
 export default function HomeFeedOverview() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getSheetsAsync());
+    dispatch(getComposersAsync());
+  });
+
   return (
     <View style={styles.mainWrapper}>
-      <Ionicons name="sync" size={20} />
+      <Ionicons
+        name="sync"
+        size={20}
+        onPress={() => {
+          dispatch(getSheetsAsync());
+          dispatch(getComposersAsync());
+        }}
+      />
       <Text style={styles.overViewText}>Overview</Text>
       <SearchBar />
       <ScrollView

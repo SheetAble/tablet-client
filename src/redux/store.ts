@@ -4,6 +4,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import userListSlice from "./slicers/userList/userListSlice";
 import dataSlice from "./slicers/data/dataSlice";
 import userSlice from "./slicers/user/userSlice";
+import uiSlice from "./slicers/ui/uiSlice";
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     userlist: userListSlice,
     data: dataSlice,
     user: userSlice,
+    ui: uiSlice,
   },
   devTools: true,
 });
