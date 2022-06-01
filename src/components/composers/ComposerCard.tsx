@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   composerNameText: {
     ...globalStyles.vollkornBodySmall,
     paddingTop: 2,
-    maxWidth: 130, // So the text won't overflow
+    maxWidth: 120, // So the text won't overflow
   },
   epochText: {
     fontFamily: "Vollkorn_400Regular",

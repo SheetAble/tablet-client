@@ -1,6 +1,6 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import React, { useEffect } from "react";
-import { colors } from "../../constants/GlobalStyleSheet";
+import { colors, globalStyles } from "../../constants/GlobalStyleSheet";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import {
   addDetailedPreview,
@@ -18,16 +18,29 @@ export default function DetailedPreview() {
       dispatch(addDetailedPreview(firstComposer));
     }
   });
-
-  return (
-    <View style={styles.mainWrapper}>
-      <Text>
-        {detailedPreviewComposer
-          ? detailedPreviewComposer.name
-          : "no composer selected"}
-      </Text>
-    </View>
-  );
+  if (detailedPreviewComposer) {
+    return (
+      <View style={styles.mainWrapper}>
+        <View style={styles.titleWrapper}>
+          <Image
+            source={{
+              uri: detailedPreviewComposer.portraitUrl,
+            }}
+            style={styles.thumbnailImage}
+          />
+          <View style={styles.textWrapper}>
+            <Text style={globalStyles.vollkornHeadline}>
+              {detailedPreviewComposer.name}
+            </Text>
+            <Text style={styles.subHeading}>
+              {detailedPreviewComposer.epoch}
+            </Text>
+          </View>
+        </View>
+      </View>
+    );
+  }
+  return <></>;
 }
 
 const styles = StyleSheet.create({
@@ -35,7 +48,25 @@ const styles = StyleSheet.create({
     flex: 0.8,
     borderLeftWidth: 0.75,
     borderColor: colors.GRAY10,
-    marginTop: -20,
+    marginTop: 20,
     paddingTop: 20,
+  },
+  titleWrapper: {
+    alignItems: "center",
+    width: "100%",
+  },
+  thumbnailImage: {
+    height: 200,
+    width: 200,
+    borderRadius: 15,
+  },
+  textWrapper: {
+    alignItems: "center",
+    ...globalStyles.mt2,
+  },
+  subHeading: {
+    ...globalStyles.vollkornSubheadline,
+    color: colors.GRAY4,
+    marginTop: -12,
   },
 });
