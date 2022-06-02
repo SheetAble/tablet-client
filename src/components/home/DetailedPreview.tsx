@@ -5,6 +5,7 @@ import {
   Image,
   TouchableHighlight,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import React, { useEffect } from "react";
 import { colors, globalStyles } from "../../constants/GlobalStyleSheet";
@@ -15,6 +16,15 @@ import {
 } from "../../redux/slicers/ui/uiSlice";
 import { selectComposers } from "../../redux/slicers/data/dataSlice";
 import Ionicons from "react-native-vector-icons/Ionicons";
+
+function BubbleInfo({ title, value }: { title: string; value: string }) {
+  return (
+    <View style={styles.bubbleInfoContainer}>
+      <Text style={styles.bubbleInfoTitleStyle}>{title}</Text>
+      <Text style={styles.bubbleInfoValueStyle}>{value}</Text>
+    </View>
+  );
+}
 
 export default function DetailedPreview() {
   const detailedPreviewComposer = useAppSelector(selectDetailedPreview);
@@ -56,6 +66,17 @@ export default function DetailedPreview() {
             </View>
           </TouchableOpacity>
         </View>
+
+        <ScrollView
+          horizontal={true}
+          style={styles.infoContainer}
+          showsHorizontalScrollIndicator={false}
+        >
+          <BubbleInfo title="Birth - Death" value="1170 - 1827" />
+          <BubbleInfo title="Works" value="342" />
+          <BubbleInfo title="Uploaded Works" value="7" />
+          <BubbleInfo title="Created At" value="10.10.2022" />
+        </ScrollView>
       </View>
     );
   }
@@ -100,10 +121,36 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "white",
     ...globalStyles.nunitoSansBodySmall,
-    marginLeft: 5,
-    marginRight: 5,
+    marginLeft: 8,
+    marginRight: 8,
   },
   buttonIcon: {
     marginTop: 5,
+  },
+
+  infoContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    marginHorizontal: 20,
+
+    marginTop: 30,
+  },
+
+  bubbleInfoContainer: {
+    backgroundColor: colors.GRAY11,
+    paddingHorizontal: 20,
+    paddingVertical: 13,
+    borderRadius: 15,
+
+    marginHorizontal: 5,
+  },
+  bubbleInfoTitleStyle: {
+    ...globalStyles.vollkornBodySmall,
+    color: colors.GRAY5,
+  },
+  bubbleInfoValueStyle: {
+    color: colors.GRAY3,
+    ...globalStyles.vollkornSubheadline,
+    lineHeight: 22,
   },
 });
