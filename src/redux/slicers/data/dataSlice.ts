@@ -76,5 +76,6 @@ export const {} = dataSlice.actions;
 export const selectSheets = (state: RootState) => state.data.sheets;
 export const selectComposers = (state: RootState) => state.data.composers;
 export const selectDataStatus = (state: RootState) => state.data.status;
+export const selectData = (state: RootState) => state.data;
 
 export default dataSlice.reducer;

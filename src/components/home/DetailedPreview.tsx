@@ -11,8 +11,9 @@ import React, { useEffect } from "react";
 import { colors, globalStyles } from "../../constants/GlobalStyleSheet";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import {
-  addDetailedPreview,
+  addDetailedPreviewAsync,
   selectDetailedPreview,
+  selectDetailedPreviewSheets,
 } from "../../redux/slicers/ui/uiSlice";
 import { selectComposers } from "../../redux/slicers/data/dataSlice";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -28,12 +29,13 @@ function BubbleInfo({ title, value }: { title: string; value: string }) {
 
 export default function DetailedPreview() {
   const detailedPreviewComposer = useAppSelector(selectDetailedPreview);
-  const firstComposer = addDetailedPreview(useAppSelector(selectComposers)[0]);
+  const detailedPreviewSheets = useAppSelector(selectDetailedPreviewSheets);
+  const firstComposer = useAppSelector(selectComposers)[0];
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (detailedPreviewComposer == undefined) {
-      dispatch(firstComposer);
+      dispatch(addDetailedPreviewAsync(firstComposer));
     }
   });
   if (detailedPreviewComposer) {
@@ -151,6 +153,6 @@ const styles = StyleSheet.create({
   bubbleInfoValueStyle: {
     color: colors.GRAY3,
     ...globalStyles.vollkornSubheadline,
-    lineHeight: 22,
+    lineHeight: 19,
   },
 });

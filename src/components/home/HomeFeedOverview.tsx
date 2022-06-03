@@ -15,8 +15,8 @@ export default function HomeFeedOverview() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getSheetsAsync());
-    dispatch(getComposersAsync());
+    //dispatch(getSheetsAsync());
+    //dispatch(getComposersAsync());
   });
 
   return (

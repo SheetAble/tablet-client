@@ -36,6 +36,11 @@ type GetComposersResponse = {
   rows: ComposerResponse[];
 };
 
+type getSheetsByComposerAPICallReturn = {
+  sheets: Sheet[];
+  composer: Composer;
+};
+
 export async function getSheetsAPICall(): Promise<Sheet[]> {
   try {
     const { data } = await axios.get<GetSheetsResponse>("/sheets");
@@ -65,6 +70,50 @@ export async function getSheetsAPICall(): Promise<Sheet[]> {
     } else {
       console.log("unexpected error: ", error);
       return [];
+    }
+  }
+}
+
+export async function getSheetsByComposerAPICall(
+  composer: Composer
+): Promise<getSheetsByComposerAPICallReturn | undefined> {
+  try {
+    /*
+    const formData = new FormData();
+    formData.append('sort_by', "updated_at desc");
+    formData.append('page', "1");
+    formData.append('limit', "1000");
+    formData.append('composer', composer.safeName);
+*/
+
+    //const { data } = await axios.post<GetSheetsResponse>("/sheets", formData);
+    const { data } = await axios.get<GetSheetsResponse>("/sheets");
+
+    let sheets: Sheet[] = [];
+    for (let i = 0; i < data.rows.length; i++) {
+      sheets.push({
+        safeSheetName: data.rows[i].safe_sheet_name,
+        sheetName: data.rows[i].sheet_name,
+        safeComposer: data.rows[i].safe_composer,
+        composer: data.rows[i].composer,
+        releaseDate: data.rows[i].ReleaseDate,
+        pdfUrl: data.rows[i].pdf_url,
+        uploaderId: data.rows[i].uploader_id,
+        createdAt: data.rows[i].created_at,
+        updatedAt: data.rows[i].updated_at,
+        tags: data.rows[i].tags,
+        informationText: data.rows[i].information_text,
+      });
+    }
+    return { sheets, composer };
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.log("error message: ", error.message);
+      console.log(error.cause);
+      return undefined;
+    } else {
+      console.log("unexpected error: ", error);
+      return undefined;
     }
   }
 }

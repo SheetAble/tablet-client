@@ -11,7 +11,7 @@ import { Composer, Sheet } from "../../redux/slicers/data/dataSlice";
 import axios from "axios";
 import { colors, globalStyles } from "../../constants/GlobalStyleSheet";
 import { useAppDispatch } from "../../redux/store";
-import { addDetailedPreview } from "../../redux/slicers/ui/uiSlice";
+import { addDetailedPreviewAsync } from "../../redux/slicers/ui/uiSlice";
 
 export default function ComposerCard({
   composer,
@@ -28,7 +28,7 @@ export default function ComposerCard({
     <TouchableWithoutFeedback
       onPressIn={() => {
         setIsPressed(true);
-        dispatch(addDetailedPreview(composer));
+        dispatch(addDetailedPreviewAsync(composer));
       }}
       onPressOut={() => setIsPressed(false)}
       key={composer.safeName}
