@@ -16,7 +16,11 @@ export default function RecentlyAddedSheets() {
       </Text>
       <ScrollView horizontal={true} style={styles.sheetsList}>
         {sheets.map((sheet, index) => (
-          <SheetCard sheet={sheet} first={index == 0} />
+          <SheetCard
+            sheet={sheet}
+            first={index == 0}
+            key={sheet.safeSheetName}
+          />
         ))}
       </ScrollView>
     </View>

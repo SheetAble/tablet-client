@@ -79,6 +79,17 @@ export default function DetailedPreview() {
           <BubbleInfo title="Uploaded Works" value="7" />
           <BubbleInfo title="Created At" value="10.10.2022" />
         </ScrollView>
+
+        <Text style={styles.uploadedWorksTitle}>Uploaded Works</Text>
+        <ScrollView style={styles.uploadedWorks}>
+          {detailedPreviewSheets.map((sheet) => (
+            <TouchableOpacity key={sheet.safeSheetName} onPress={() => {}}>
+              <View style={styles.uploadedWorksContainer}>
+                <Text style={styles.uploadedWorksText}>{sheet.sheetName}</Text>
+              </View>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
       </View>
     );
   }
@@ -134,7 +145,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     marginHorizontal: 20,
-
+    flexGrow: 0,
     marginTop: 30,
   },
 
@@ -154,5 +165,26 @@ const styles = StyleSheet.create({
     color: colors.GRAY3,
     ...globalStyles.vollkornSubheadline,
     lineHeight: 19,
+  },
+  uploadedWorks: {
+    marginHorizontal: 30,
+  },
+  uploadedWorksTitle: {
+    ...globalStyles.vollkornSubheadline,
+    marginLeft: 30,
+    marginTop: 25,
+    marginBottom: 10,
+  },
+  uploadedWorksContainer: {
+    backgroundColor: colors.GRAY11,
+    padding: 5,
+    marginBottom: 15,
+    borderRadius: 10,
+  },
+  uploadedWorksText: {
+    fontFamily: "Vollkorn_400Regular",
+    fontSize: 16,
+    color: "black",
+    paddingLeft: 5,
   },
 });

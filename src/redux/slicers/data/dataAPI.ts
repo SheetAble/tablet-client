@@ -78,16 +78,17 @@ export async function getSheetsByComposerAPICall(
   composer: Composer
 ): Promise<getSheetsByComposerAPICallReturn | undefined> {
   try {
-    /*
     const formData = new FormData();
-    formData.append('sort_by', "updated_at desc");
-    formData.append('page', "1");
-    formData.append('limit', "1000");
-    formData.append('composer', composer.safeName);
-*/
+    formData.append("sort_by", "updated_at desc");
+    formData.append("page", "1");
+    formData.append("limit", "1000");
+    formData.append("composer", composer.safeName);
 
-    //const { data } = await axios.post<GetSheetsResponse>("/sheets", formData);
-    const { data } = await axios.get<GetSheetsResponse>("/sheets");
+    const { data } = await axios.post<GetSheetsResponse>("/sheets", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
 
     let sheets: Sheet[] = [];
     for (let i = 0; i < data.rows.length; i++) {
