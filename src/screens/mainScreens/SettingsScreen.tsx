@@ -2,12 +2,12 @@ import { Button, Text, View } from "react-native";
 import {
   getComposersAsync,
   getSheetsAsync,
-} from "../redux/slicers/data/dataSlice";
+} from "../../redux/slicers/data/dataSlice";
 import {
   loginAsync,
   selectAuthenticated,
-} from "../redux/slicers/user/userSlice";
-import { useAppDispatch, useAppSelector } from "../redux/store";
+} from "../../redux/slicers/user/userSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
 
 export default function SettingsScreen() {
   const authenticated = useAppSelector(selectAuthenticated);

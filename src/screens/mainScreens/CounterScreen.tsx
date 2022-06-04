@@ -27,8 +27,8 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from "react-native/Libraries/NewAppScreen";
-import { Counter } from "../components/Counter";
-import { UserList } from "../components/UserList";
+import { Counter } from "../../components/Counter";
+import { UserList } from "../../components/UserList";
 import { RootStackParamList } from "./RootStackParams";
 
 type counterScreenProp = NativeStackNavigationProp<

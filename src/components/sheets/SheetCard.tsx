@@ -10,6 +10,9 @@ import React, { useState } from "react";
 import { Sheet } from "../../redux/slicers/data/dataSlice";
 import axios from "axios";
 import { colors, globalStyles } from "../../constants/GlobalStyleSheet";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../../screens/mainScreens/RootStackParams";
 
 export default function SheetCard({
   sheet,
@@ -21,10 +24,17 @@ export default function SheetCard({
   // To remove shadow when button is pressed
   const [isPressed, setIsPressed] = useState(false);
 
+  type homeScreenProp = NativeStackNavigationProp<RootStackParamList, "Home">;
+
+  const navigation = useNavigation<homeScreenProp>();
+
   return (
     <TouchableWithoutFeedback
       key={sheet.safeSheetName}
-      onPressIn={() => setIsPressed(true)}
+      onPressIn={() => {
+        setIsPressed(true);
+        navigation.navigate("Sheet", sheet);
+      }}
       onPressOut={() => setIsPressed(false)}
     >
       <View
