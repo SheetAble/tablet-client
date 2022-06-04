@@ -1,4 +1,4 @@
-import { Sheet } from "../../redux/slicers/data/dataSlice";
+import { Sheet } from "../redux/slicers/data/dataSlice";
 
 export type RootStackParamList = {
   // Main Screens
