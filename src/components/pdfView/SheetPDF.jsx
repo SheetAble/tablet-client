@@ -21,26 +21,20 @@ export default function SheetPDF({ sheet }) {
   return (
     <View style={styles.container}>
       <Pdf
-        ref={(pdf) => {
-          setPdf(pdf);
-        }}
+        ref={(pdf) => {setPdf(pdf)}}
         source={source}
-        page={1}
-        trustAllCerts={false}
         onLoadComplete={(numberOfPages, filePath) => {}}
         onPageChanged={(page, numberOfPages) => {}}
-        onError={(error) => {
-          console.log(error);
-        }}
-        onPressLink={(uri) => {}}
+        onError={(error) => {console.log(error);}}
         style={styles.pdf}
-        fitWidth={true}
-        enableAnnotationRendering={true}
         enablePaging={true}
         horizontal={true}
-        onPageSingleTap={(page) => {
-          console.log(pdf.pageNumber);
-          pdf.setPage((page += 1));
+        
+
+        onPageSingleTap={(page, x, y) => {
+          if (x > 500) {
+            pdf.setPage((page += 1));
+          } else {pdf.setPage((page -= 1));}
         }}
       />
     </View>
@@ -52,7 +46,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "center",
-    marginTop: 25,
   },
   pdf: {
     flex: 1,

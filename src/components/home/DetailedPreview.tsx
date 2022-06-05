@@ -17,6 +17,9 @@ import {
 } from "../../redux/slicers/ui/uiSlice";
 import { selectComposers } from "../../redux/slicers/data/dataSlice";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../../screens/RootStackParams";
 
 function BubbleInfo({ title, value }: { title: string; value: string }) {
   return (
@@ -32,6 +35,10 @@ export default function DetailedPreview() {
   const detailedPreviewSheets = useAppSelector(selectDetailedPreviewSheets);
   const firstComposer = useAppSelector(selectComposers)[0];
   const dispatch = useAppDispatch();
+
+  type homeScreenProp = NativeStackNavigationProp<RootStackParamList, "Home">;
+
+  const navigation = useNavigation<homeScreenProp>();
 
   useEffect(() => {
     if (detailedPreviewComposer == undefined) {
@@ -83,7 +90,7 @@ export default function DetailedPreview() {
         <Text style={styles.uploadedWorksTitle}>Uploaded Works</Text>
         <ScrollView style={styles.uploadedWorks}>
           {detailedPreviewSheets.map((sheet) => (
-            <TouchableOpacity key={sheet.safeSheetName} onPress={() => {}}>
+            <TouchableOpacity key={sheet.safeSheetName} onPress={() => {navigation.navigate("Sheet", sheet)}}>
               <View style={styles.uploadedWorksContainer}>
                 <Text style={styles.uploadedWorksText}>{sheet.sheetName}</Text>
               </View>
