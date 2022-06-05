@@ -17,13 +17,13 @@ import { TabScreenText } from "./src/components/utils/TabScreenText";
 import axios from "axios";
 import { createStackNavigator } from "@react-navigation/stack";
 import SheetScreen from "./src/screens/functionalScreens/SheetScreen";
-import { RootStackParamList } from "./src/screens/mainScreens/RootStackParams";
+import { RootStackParamList } from "./src/screens/RootStackParams";
 
 const Tab = createBottomTabNavigator<RootStackParamList>();
 const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
-  axios.defaults.baseURL = "http://192.168.178.20:8080/api";
+  axios.defaults.baseURL = "http://192.168.178.48:8080/api";
 
   if (!loadFonts()) {
     return (
