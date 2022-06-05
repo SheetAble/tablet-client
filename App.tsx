@@ -1,6 +1,6 @@
 import { Provider } from "react-redux";
 import { store } from "./src/redux/store";
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, LogBox } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { loadFonts } from "./src/utils/loadFonts";
 import HomeScreen from "./src/screens/mainScreens/HomeScreen";
@@ -25,6 +25,10 @@ const Stack = createStackNavigator<RootStackParamList>();
 export default function App() {
   axios.defaults.baseURL = "http://192.168.0.65:8080/api";
 
+  // Ignore ViewPropTypes warning
+  //LogBox.ignoreLogs(["ViewPropTypes will be removed from React Native. Migrate to ViewPropTypes exported from 'deprecated-react-native-prop-types'."]); 
+  //LogBox.ignoreAllLogs()
+
   if (!loadFonts()) {
     return (
       <View>
@@ -37,7 +41,7 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Home"
+          initialRouteName="TabNavigator"
           screenOptions={{
             headerMode: "screen",
             headerTintColor: "white",
@@ -45,7 +49,7 @@ export default function App() {
           }}
         >
           <Stack.Screen
-            name="Home"
+            name="TabNavigator"
             component={TabNavigator}
             options={{ headerShown: false }}
           />
