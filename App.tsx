@@ -23,7 +23,7 @@ const Tab = createBottomTabNavigator<RootStackParamList>();
 const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
-  axios.defaults.baseURL = "http://192.168.178.48:8080/api";
+  axios.defaults.baseURL = "http://192.168.178.20:8080/api";
 
   if (!loadFonts()) {
     return (
