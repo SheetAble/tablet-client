@@ -24,26 +24,32 @@ export default function SheetPDF({ sheet }) {
     },
   };
 
+  const [pdf, setPdf] = useState(undefined);
+
   return (
     <View style={styles.container}>
       <Pdf
+        ref={(pdf) => {
+          setPdf(pdf);
+        }}
         source={source}
+        page={1}
         trustAllCerts={false}
-        onLoadComplete={(numberOfPages, filePath) => {
-          console.log(`Number of pages: ${numberOfPages}`);
-        }}
-        onPageChanged={(page, numberOfPages) => {
-          console.log(`Current page: ${page}`);
-        }}
+        onLoadComplete={(numberOfPages, filePath) => {}}
+        onPageChanged={(page, numberOfPages) => {}}
         onError={(error) => {
           console.log(error);
         }}
-        onPressLink={(uri) => {
-          console.log(`Link pressed: ${uri}`);
-        }}
+        onPressLink={(uri) => {}}
         style={styles.pdf}
+        fitWidth={true}
+        enableAnnotationRendering={true}
         enablePaging={true}
-        enableAntialiasing={true}
+        horizontal={true}
+        onPageSingleTap={(page) => {
+          console.log(pdf.pageNumber);
+          pdf.setPage((page += 1));
+        }}
       />
     </View>
   );

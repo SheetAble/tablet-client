@@ -12,7 +12,7 @@ import axios from "axios";
 import { colors, globalStyles } from "../../constants/GlobalStyleSheet";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../../screens/mainScreens/RootStackParams";
+import { RootStackParamList } from "../../screens/RootStackParams";
 
 export default function SheetCard({
   sheet,
@@ -33,9 +33,12 @@ export default function SheetCard({
       key={sheet.safeSheetName}
       onPressIn={() => {
         setIsPressed(true);
-        navigation.navigate("Sheet", sheet);
       }}
       onPressOut={() => setIsPressed(false)}
+      onLongPress={() => {
+        navigation.navigate("Sheet", sheet);
+      }}
+      delayLongPress={20}
     >
       <View
         style={[
