@@ -15,8 +15,6 @@ export default function SheetScreen({ route, navigation }: Props) {
   const sheet = route.params;
 
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <SheetPDf sheet={sheet} />
-    </View>
+    <SheetPDf sheet={sheet} />
   );
 }
