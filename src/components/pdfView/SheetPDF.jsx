@@ -2,19 +2,11 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Dimensions, View } from "react-native";
 import Pdf from "react-native-pdf";
-import { Sheet } from "../../redux/slicers/data/dataSlice";
 
-function getBase64(url) {
-  return axios
-    .get(url, {
-      responseType: "arraybuffer",
-    })
-    .then((response) =>
-      Buffer.from(response.data, "binary").toString("base64")
-    );
-}
 
 export default function SheetPDF({ sheet }) {
+
+
   const source = {
     uri: `${axios.defaults.baseURL}/${sheet.pdfUrl}`,
     cache: true,

@@ -19,7 +19,7 @@ export default function RecentlyAddedComposers() {
       </Text>
       <ScrollView horizontal={true} style={styles.sheetsList}>
         {composers.map((composer, index) => (
-          <ComposerCard composer={composer} first={index == 0} />
+          <ComposerCard composer={composer} first={index == 0} key={composer.safeName} />
         ))}
       </ScrollView>
     </View>
