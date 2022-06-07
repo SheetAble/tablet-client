@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
   NativeStackNavigationProp,
@@ -14,7 +14,8 @@ type Props = NativeStackScreenProps<RootStackParamList, "Sheet">;
 export default function SheetScreen({ route, navigation }: Props) {
   const sheet = route.params;
 
+
   return (
-    <SheetPDf sheet={sheet} />
+      <SheetPDf sheet={sheet} />
   );
 }
