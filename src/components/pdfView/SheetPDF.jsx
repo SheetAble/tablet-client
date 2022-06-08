@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
-import { StyleSheet, Dimensions, View, Button } from "react-native";
+import { StyleSheet, Dimensions, View, Button, Text } from "react-native";
 import Pdf from "react-native-pdf";
 import SketchCanvas from "../../components/sketchCanvas/SketchCanvas";
 import { SketchCanvasRef } from "../../components/sketchCanvas/types";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { colors } from "../../constants/GlobalStyleSheet";
 
 export default function SheetPDF({ sheet }) {
   const source = {
@@ -19,14 +21,39 @@ export default function SheetPDF({ sheet }) {
   
   const ref = useRef();
 
+  const [sketchEnabled, setSketchEnabled] = useState(false)
+
   return (
     <>
-      <SketchCanvas
-            containerStyle={styles.sketchContainer}
-            ref={ref}
-            strokeColor="black"
-            strokeWidth={1}
-        />
+    { sketchEnabled &&
+      (
+        <>
+          <View style={styles.sketchToolbarContainer}>
+            <View style={styles.sketchToolbarLeft}>
+              <Ionicons
+                name="pencil-outline"
+                color="black"
+                size={25}
+              />
+            </View>
+            <View style={styles.sketchToolbarRight}>
+              <Ionicons
+                name="close-outline"
+                color="black"
+                size={34}
+                onPress={() => setSketchEnabled(false)}
+              />
+            </View>
+          </View>
+          <SketchCanvas
+                containerStyle={styles.sketchContainer}
+                ref={ref}
+                strokeColor="black"
+                strokeWidth={1}
+            />
+          </>
+      )
+    }
       <View style={styles.container}>
         <Pdf
           ref={(pdf) => {setPdf(pdf)}}
@@ -40,7 +67,8 @@ export default function SheetPDF({ sheet }) {
           
 
           onPageSingleTap={(page, x, y) => {
-            if (x > 500) {
+            if (y < 20) {setSketchEnabled(true)}
+            else if (x > 500) {
               pdf.setPage((page += 1));
             } else {pdf.setPage((page -= 1));}
           }}
@@ -66,5 +94,19 @@ const styles = StyleSheet.create({
     flex: 1,
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
+    marginBottom: 60
   },
+  sketchToolbarContainer: {
+    backgroundColor: colors.BLUE10,
+    paddingVertical: 5,
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  sketchToolbarLeft: {
+    paddingHorizontal: "6%",
+    paddingTop: 5
+  },
+  sketchToolbarRight: {
+    paddingHorizontal: "6%"
+  }
 });
