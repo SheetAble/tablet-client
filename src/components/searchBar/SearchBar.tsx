@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { colors, globalStyles } from "../../constants/GlobalStyleSheet";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-export default function SearchBar() {
+export default function SearchBar({ placeholder } : { placeholder?: string }) {
   const [searchString, setSearchString] = useState("");
 
   return (
@@ -16,7 +16,7 @@ export default function SearchBar() {
       />
       <TextInput
         style={styles.input}
-        placeholder="Search for Sheets or Composers"
+        placeholder={placeholder ? placeholder : "Search for Sheets or Composers"}
         onChangeText={(searchString) => {
           setSearchString(searchString);
         }}

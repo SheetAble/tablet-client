@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { StyleSheet, Text, View, ScrollView, FlatList } from "react-native";
 import SearchBar from "../../components/searchBar/SearchBar";
 import RecentlyAddedSheets from "../../components/sheets/RecentlyAddedSheets";
 import SheetCard from "../../components/sheets/SheetCard";
@@ -12,19 +12,21 @@ export default function SheetsScreen() {
   return (
     <View style={styles.mainWrapper}>
       <Text style={styles.overViewText}>Overview</Text>
-      <SearchBar />
+      <SearchBar placeholder="Search Sheets"/>
       <View style={styles.mainSection}>
         <Text style={[globalStyles.vollkornHeadline]}>
           Recently Added Sheets
         </Text>
-        <ScrollView style={styles.sheetsList}>
-          {sheets.map((sheet, index) => (
-            <SheetCard
-              sheet={sheet}
-              first={index == 0}
-              key={sheet.safeSheetName}
-            />
-          ))}
+        <ScrollView style={{marginLeft: -10 }}>
+          <FlatList 
+            data={sheets}
+            renderItem={(sheet) => <SheetCard sheet={sheet.item} first={sheet.index == 0 || sheet.index%5 == 0} />}
+            keyExtractor={sheet => sheet.safeSheetName}
+            contentContainerStyle={{alignSelf: 'flex-start'}}
+            numColumns={5}
+            showsVerticalScrollIndicator={false}
+            showsHorizontalScrollIndicator={false}
+          />
         </ScrollView>
       </View>
     </View>
@@ -47,8 +49,6 @@ const styles = StyleSheet.create({
     ...globalStyles.mt3,
   },
   sheetsList: {
-    flexDirection: "row",
-    flexWrap: "wrap",
     
   },
 });
