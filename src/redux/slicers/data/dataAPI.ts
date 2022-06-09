@@ -142,9 +142,32 @@ export async function getSheetsByComposerAPICall(
   }
 }
 
-export async function getComposersAPICall(): Promise<Composer[]> {
+export async function getComposersAPICall({
+  sortBy,
+  page,
+  limit,
+}: {
+  sortBy?: string;
+  page?: string;
+  limit?: string;
+}): Promise<Composer[]> {
   try {
-    const { data } = await axios.get<GetComposersResponse>("/composers");
+    console.log("get Composers");
+
+    const formData = new FormData();
+    formData.append("sort_by", sortBy ? sortBy : "updated_at desc");
+    formData.append("page", page ? page : "1");
+    formData.append("limit", limit ? limit : "6");
+
+    const { data } = await axios.post<GetComposersResponse>(
+      "/composers",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
 
     let composers: Composer[] = [];
     for (let i = 0; i < data.rows.length; i++) {

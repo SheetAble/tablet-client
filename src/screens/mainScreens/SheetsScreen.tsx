@@ -40,7 +40,7 @@ export default function SheetsScreen() {
         <Text style={globalStyles.vollkornHeadline}>
           Sheets by newest uploads
         </Text>
-        <ScrollView style={{ marginLeft: -10 }}>
+        <ScrollView style={{ marginLeft: -10, height: "100%" }}>
           <FlatList
             data={sheets}
             renderItem={(sheet) => (
