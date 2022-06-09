@@ -35,10 +35,6 @@ export default function SheetCard({
         setIsPressed(true);
       }}
       onPressOut={() => setIsPressed(false)}
-      onLongPress={() => {
-        navigation.navigate("Sheet", sheet);
-      }}
-      delayLongPress={20}
     >
       <View
         style={[
@@ -53,14 +49,16 @@ export default function SheetCard({
           }}
           style={styles.thumbnailImage}
         />
-        <View style={styles.textInfo}>
-          <Text numberOfLines={1} style={styles.sheetNameText}>
-            {sheet.sheetName}
-          </Text>
-          <Text numberOfLines={1} style={styles.composerNameText}>
-            {sheet.composer}
-          </Text>
-        </View>
+        <TouchableWithoutFeedback onPress={() => navigation.navigate("Sheet", sheet)}>
+          <View style={styles.textInfo}>
+            <Text numberOfLines={1} style={styles.sheetNameText}>
+              {sheet.sheetName}
+            </Text>
+            <Text numberOfLines={1} style={styles.composerNameText}>
+              {sheet.composer}
+            </Text>
+          </View>
+        </TouchableWithoutFeedback>
       </View>
     </TouchableWithoutFeedback>
   );
