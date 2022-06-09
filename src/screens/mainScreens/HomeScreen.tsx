@@ -6,7 +6,7 @@ import HomeFeedOverview from "../../components/home/HomeFeedOverview";
 import { colors, globalStyles } from "../../constants/GlobalStyleSheet";
 import { selectData } from "../../redux/slicers/data/dataSlice";
 import { useAppSelector } from "../../redux/store";
-import { RootStackParamList } from "./RootStackParams";
+import { RootStackParamList } from "../RootStackParams";
 
 type homeScreenProp = NativeStackNavigationProp<RootStackParamList, "Home">;
 
