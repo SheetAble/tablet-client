@@ -7,6 +7,7 @@ import {
   getSheetsAsync,
 } from "../../redux/slicers/data/dataSlice";
 import { useAppDispatch } from "../../redux/store";
+import { syncAll } from "../../utils/callMethods";
 import RecentlyAddedComposers from "../composers/RecentlyAddedComposers";
 import SearchBar from "../searchBar/SearchBar";
 import RecentlyAddedSheets from "../sheets/RecentlyAddedSheets";
@@ -25,8 +26,7 @@ export default function HomeFeedOverview() {
         name="sync"
         size={20}
         onPress={() => {
-          dispatch(getSheetsAsync({}));
-          dispatch(getComposersAsync());
+          syncAll(dispatch);
         }}
       />
       <Text style={styles.overViewText}>Overview</Text>

@@ -2,12 +2,14 @@ import { Button, Text, View } from "react-native";
 import {
   getComposersAsync,
   getSheetsAsync,
+  getSheetsPageAsync,
 } from "../../redux/slicers/data/dataSlice";
 import {
   loginAsync,
   selectAuthenticated,
 } from "../../redux/slicers/user/userSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
+import { syncAll } from "../../utils/callMethods";
 
 export default function SettingsScreen() {
   const authenticated = useAppSelector(selectAuthenticated);
@@ -29,8 +31,7 @@ export default function SettingsScreen() {
       <Button
         title="Get Data"
         onPress={() => {
-          dispatch(getSheetsAsync({}));
-          dispatch(getComposersAsync());
+          syncAll(dispatch);
         }}
       />
     </View>
