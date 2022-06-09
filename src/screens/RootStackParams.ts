@@ -2,10 +2,10 @@ import { Sheet } from "../redux/slicers/data/dataSlice";
 
 export type RootStackParamList = {
   // TabNavigator Root
-  TabNavigator: undefined;
+  Home: undefined;
 
   // Main Screens
-  Home: undefined;
+  HomeFeed: undefined;
   Counter: undefined;
   Sheets: undefined;
   Composers: undefined;
