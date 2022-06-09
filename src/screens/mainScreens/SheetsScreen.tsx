@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, ScrollView, FlatList } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  FlatList,
+  Dimensions,
+} from "react-native";
 import SearchBar from "../../components/searchBar/SearchBar";
 import RecentlyAddedSheets from "../../components/sheets/RecentlyAddedSheets";
 import SheetCard from "../../components/sheets/SheetCard";
@@ -30,8 +37,8 @@ export default function SheetsScreen() {
       <Text style={styles.overViewText}>Overview</Text>
       <SearchBar placeholder="Search Sheets" />
       <View style={styles.mainSection}>
-        <Text style={[globalStyles.vollkornHeadline]}>
-          Recently Added Sheets
+        <Text style={globalStyles.vollkornHeadline}>
+          Sheets by newest uploads
         </Text>
         <ScrollView style={{ marginLeft: -10 }}>
           <FlatList
@@ -39,12 +46,21 @@ export default function SheetsScreen() {
             renderItem={(sheet) => (
               <SheetCard
                 sheet={sheet.item}
-                first={sheet.index == 0 || sheet.index % 5 == 0}
+                first={
+                  sheet.index == 0 ||
+                  sheet.index %
+                    Math.ceil(Dimensions.get("window").width / 200) ==
+                    0
+                }
               />
             )}
             keyExtractor={(sheet) => sheet.safeSheetName}
             contentContainerStyle={{ alignSelf: "flex-start" }}
-            numColumns={5}
+            numColumns={
+              Math.ceil(
+                Dimensions.get("window").width / 200
+              ) /* Est. width of sheet is 200 */
+            }
             showsVerticalScrollIndicator={false}
             showsHorizontalScrollIndicator={false}
           />
