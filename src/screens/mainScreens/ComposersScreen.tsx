@@ -14,6 +14,7 @@ import {
   getComposersAsync,
   getSheetsAsync,
   selectComposers,
+  selectComposersPage,
   selectSheets,
   selectSheetsPage,
 } from "../../redux/slicers/data/dataSlice";
@@ -23,7 +24,7 @@ import { syncAll } from "../../utils/callMethods";
 import ComposerCard from "../../components/composers/ComposerCard";
 
 export default function ComposersScreen() {
-  const composers = useAppSelector(selectComposers);
+  const composers = useAppSelector(selectComposersPage);
   const dispatch = useAppDispatch();
 
   return (
@@ -42,7 +43,7 @@ export default function ComposersScreen() {
         <Text style={globalStyles.vollkornHeadline}>
           Composers by newest uploads
         </Text>
-        <ScrollView style={{ marginLeft: -10 }}>
+        <ScrollView style={{ marginLeft: -10, height: "100%" }}>
           <FlatList
             data={composers}
             renderItem={(composer) => (

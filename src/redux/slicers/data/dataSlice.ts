@@ -29,6 +29,7 @@ interface SheetsState {
   sheets: Sheet[];
   composers: Composer[];
   sheetsPage: Sheet[]; // Bigger list of sheets
+  composersPage: Composer[]; // Bigger list of composers
   status: "idle" | "loading" | "failed";
 }
 
@@ -36,6 +37,7 @@ const initialState: SheetsState = {
   sheets: [],
   composers: [],
   sheetsPage: [],
+  composersPage: [],
   status: "idle",
 };
 
@@ -51,6 +53,11 @@ export const getSheetsPageAsync = createAsyncThunk(
 
 export const getComposersAsync = createAsyncThunk(
   "data/getComposers",
+  getComposersAPICall
+);
+
+export const getComposersPageAsync = createAsyncThunk(
+  "data/getComposersPage",
   getComposersAPICall
 );
 
@@ -82,6 +89,14 @@ export const dataSlice = createSlice({
       .addCase(getComposersAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.composers = action.payload;
+      })
+
+      .addCase(getComposersPageAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getComposersPageAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.composersPage = action.payload;
       });
   },
 });
@@ -91,6 +106,8 @@ export const {} = dataSlice.actions;
 export const selectSheets = (state: RootState) => state.data.sheets;
 export const selectSheetsPage = (state: RootState) => state.data.sheetsPage;
 export const selectComposers = (state: RootState) => state.data.composers;
+export const selectComposersPage = (state: RootState) =>
+  state.data.composersPage;
 export const selectDataStatus = (state: RootState) => state.data.status;
 export const selectData = (state: RootState) => state.data;
 
