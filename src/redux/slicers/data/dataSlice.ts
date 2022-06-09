@@ -44,6 +44,11 @@ export const getSheetsAsync = createAsyncThunk(
   getSheetsAPICall
 );
 
+export const getSheetsPageAsync = createAsyncThunk(
+  "data/getSheetsPage",
+  getSheetsAPICall
+);
+
 export const getComposersAsync = createAsyncThunk(
   "data/getComposers",
   getComposersAPICall
@@ -63,6 +68,14 @@ export const dataSlice = createSlice({
         state.sheets = action.payload;
       })
 
+      .addCase(getSheetsPageAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getSheetsPageAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.sheetsPage = action.payload;
+      })
+
       .addCase(getComposersAsync.pending, (state) => {
         state.status = "loading";
       })
@@ -76,6 +89,7 @@ export const dataSlice = createSlice({
 export const {} = dataSlice.actions;
 
 export const selectSheets = (state: RootState) => state.data.sheets;
+export const selectSheetsPage = (state: RootState) => state.data.sheetsPage;
 export const selectComposers = (state: RootState) => state.data.composers;
 export const selectDataStatus = (state: RootState) => state.data.status;
 export const selectData = (state: RootState) => state.data;

@@ -3,14 +3,30 @@ import SearchBar from "../../components/searchBar/SearchBar";
 import RecentlyAddedSheets from "../../components/sheets/RecentlyAddedSheets";
 import SheetCard from "../../components/sheets/SheetCard";
 import { globalStyles } from "../../constants/GlobalStyleSheet";
-import { selectSheets } from "../../redux/slicers/data/dataSlice";
-import { useAppSelector } from "../../redux/store";
+import {
+  getComposersAsync,
+  getSheetsAsync,
+  selectSheets,
+  selectSheetsPage,
+} from "../../redux/slicers/data/dataSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { syncAll } from "../../utils/callMethods";
 
 export default function SheetsScreen() {
-  const sheets = useAppSelector(selectSheets);
+  const sheets = useAppSelector(selectSheetsPage);
+  const dispatch = useAppDispatch();
 
   return (
     <View style={styles.mainWrapper}>
+      <Ionicons
+        name="sync"
+        size={20}
+        onPress={() => {
+          syncAll(dispatch);
+        }}
+      />
+
       <Text style={styles.overViewText}>Overview</Text>
       <SearchBar placeholder="Search Sheets" />
       <View style={styles.mainSection}>
