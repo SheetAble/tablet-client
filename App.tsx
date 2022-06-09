@@ -26,7 +26,9 @@ export default function App() {
   axios.defaults.baseURL = "http://192.168.0.65:8080/api";
 
   // Ignore ViewPropTypes warning
-  LogBox.ignoreLogs(["ViewPropTypes will be removed from React Native. Migrate to ViewPropTypes exported from 'deprecated-react-native-prop-types'."]); 
+  LogBox.ignoreLogs([
+    "ViewPropTypes will be removed from React Native. Migrate to ViewPropTypes exported from 'deprecated-react-native-prop-types'.",
+  ]);
 
   if (!loadFonts()) {
     return (
@@ -40,7 +42,7 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="TabNavigator"
+          initialRouteName="Home"
           screenOptions={{
             headerMode: "screen",
             headerTintColor: "white",
@@ -48,7 +50,7 @@ export default function App() {
           }}
         >
           <Stack.Screen
-            name="TabNavigator"
+            name="Home"
             component={TabNavigator}
             options={{ headerShown: false }}
           />
@@ -77,7 +79,7 @@ function TabNavigator() {
       }}
     >
       <Tab.Screen
-        name="Home"
+        name="HomeFeed"
         component={HomeScreen}
         options={{
           tabBarLabel: ({ focused }) => (
