@@ -41,9 +41,29 @@ type getSheetsByComposerAPICallReturn = {
   composer: Composer;
 };
 
-export async function getSheetsAPICall(): Promise<Sheet[]> {
+export async function getSheetsAPICall({
+  sortBy,
+  page,
+  limit,
+  composer,
+}: {
+  sortBy?: string;
+  page?: string;
+  limit?: string;
+  composer?: string;
+}): Promise<Sheet[]> {
   try {
-    const { data } = await axios.get<GetSheetsResponse>("/sheets");
+    const formData = new FormData();
+    formData.append("sort_by", sortBy ? sortBy : "updated_at desc");
+    formData.append("page", page ? page : "1");
+    formData.append("limit", limit ? limit : "6");
+    formData.append("composer", composer ? composer : "");
+
+    const { data } = await axios.post<GetSheetsResponse>("/sheets", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
 
     let sheets: Sheet[] = [];
     for (let i = 0; i < data.rows.length; i++) {
@@ -77,6 +97,9 @@ export async function getSheetsAPICall(): Promise<Sheet[]> {
 export async function getSheetsByComposerAPICall(
   composer: Composer
 ): Promise<getSheetsByComposerAPICallReturn | undefined> {
+  /*
+    Seperate function, because we want to give the composers through the params to redux state
+  */
   try {
     const formData = new FormData();
     formData.append("sort_by", "updated_at desc");
