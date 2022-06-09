@@ -76,6 +76,7 @@ const SketchCanvas = forwardRef<SketchCanvasRef, SketchCanvasProps>(
         });
         
         setPathsLength((prevLength) => prevLength + 1);
+        
       },
       onActive: ({ x, y }) => {
         paths.current.at(-1)?.path.lineTo(x, y);

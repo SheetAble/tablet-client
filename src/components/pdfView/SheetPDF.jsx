@@ -6,6 +6,10 @@ import SketchCanvas from "../../components/sketchCanvas/SketchCanvas";
 import { SketchCanvasRef } from "../../components/sketchCanvas/types";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { colors } from "../../constants/GlobalStyleSheet";
+import Svg, { Path } from 'react-native-svg';
+
+
+
 
 export default function SheetPDF({ sheet }) {
   const source = {
@@ -16,12 +20,12 @@ export default function SheetPDF({ sheet }) {
       Authorization: axios.defaults.headers.common["Authorization"],
     },
   };
-
   const [pdf, setPdf] = useState(undefined);
-  
   const ref = useRef();
 
   const [sketchEnabled, setSketchEnabled] = useState(false)
+  const [paths, setPaths] = useState([])
+
 
   return (
     <>
@@ -37,6 +41,24 @@ export default function SheetPDF({ sheet }) {
               />
             </View>
             <View style={styles.sketchToolbarRight}>
+              <Ionicons
+                name="close"
+                color="red"
+                size={34}
+                onPress={() => {
+                  ref.current.getPaths().map(path => {
+                    console.log("set path", path.path.toSVGString());
+                    setPaths(oldP => [...oldP, path])
+                    console.log(paths.length);
+                  })
+                  setPaths(ref.current.getPaths())
+                  console.log(ref.current.getPaths().length);
+                  console.log(paths.length)
+                  console.log("logtog: " + paths.map(p => console.log(p.path.toSVGString())));
+                  setSketchEnabled(false)
+                }
+                }
+              />
               <Ionicons
                 name="close-outline"
                 color="black"
@@ -54,7 +76,36 @@ export default function SheetPDF({ sheet }) {
           </>
       )
     }
+    {!sketchEnabled && paths.length > 0 && 
+    <>
+    <Text>Hi</Text>
+      <Svg height={Dimensions.get("window").height} width={Dimensions.get("window").width} >
+        <Path
+            d="M415.5 138.5L415.5 140.5L415.5 153.5L415.5 185.5L415.5 200L415.5 214L415.5 235L415.5 251L414 306.5L409 339.5L401.5 366L394 385.5L380 407L376 412L374 414L373 414.5"
+            fill="none"
+            stroke="red"
+          />
+        {paths.map(path => {
+          
+          (
+            <>
+            <Text>Test</Text>
+            <Path
+              d={path.path.toSVGString()}
+              fill="none"
+              stroke="red"
+            />
+            </>
+          )
+        
+        }
+          
+          )}
+        </Svg>
+        </>
+      }
       <View style={styles.container}>
+        
         <Pdf
           ref={(pdf) => {setPdf(pdf)}}
           source={source}

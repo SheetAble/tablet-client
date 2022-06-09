@@ -16,7 +16,7 @@ import { useAppDispatch, useAppSelector } from "../redux/store";
 import { colors, globalStyles } from "../constants/GlobalStyleSheet";
 import { NavigationProp } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../screens/mainScreens/RootStackParams";
+import { RootStackParamList } from "../screens/RootStackParams";
 
 type counterScreenProp = NativeStackNavigationProp<
   RootStackParamList,
