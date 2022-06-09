@@ -29,7 +29,7 @@ export default function SettingsScreen() {
       <Button
         title="Get Data"
         onPress={() => {
-          dispatch(getSheetsAsync());
+          dispatch(getSheetsAsync({}));
           dispatch(getComposersAsync());
         }}
       />

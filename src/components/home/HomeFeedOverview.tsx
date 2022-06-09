@@ -25,7 +25,7 @@ export default function HomeFeedOverview() {
         name="sync"
         size={20}
         onPress={() => {
-          dispatch(getSheetsAsync());
+          dispatch(getSheetsAsync({}));
           dispatch(getComposersAsync());
         }}
       />

@@ -28,12 +28,14 @@ export type Composer = {
 interface SheetsState {
   sheets: Sheet[];
   composers: Composer[];
+  sheetsPage: Sheet[]; // Bigger list of sheets
   status: "idle" | "loading" | "failed";
 }
 
 const initialState: SheetsState = {
   sheets: [],
   composers: [],
+  sheetsPage: [],
   status: "idle",
 };
 
