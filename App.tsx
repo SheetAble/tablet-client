@@ -112,7 +112,7 @@ function TabNavigator() {
       />
       <Tab.Screen
         name="Composers"
-        component={CounterScreen}
+        component={ComposersScreen}
         options={{
           tabBarLabel: ({ focused }) => (
             <TabScreenText focused={focused} label="Composers" />
