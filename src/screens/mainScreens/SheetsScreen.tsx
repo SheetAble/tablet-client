@@ -40,31 +40,29 @@ export default function SheetsScreen() {
         <Text style={globalStyles.vollkornHeadline}>
           Sheets by newest uploads
         </Text>
-        <ScrollView style={{ marginLeft: -10, height: "100%" }}>
-          <FlatList
-            data={sheets}
-            renderItem={(sheet) => (
-              <SheetCard
-                sheet={sheet.item}
-                first={
-                  sheet.index == 0 ||
-                  sheet.index %
-                    Math.ceil(Dimensions.get("window").width / 200) ==
-                    0
-                }
-              />
-            )}
-            keyExtractor={(sheet) => sheet.safeSheetName}
-            contentContainerStyle={{ alignSelf: "flex-start" }}
-            numColumns={
-              Math.ceil(
-                Dimensions.get("window").width / 200
-              ) /* Est. width of sheet is 200 */
-            }
-            showsVerticalScrollIndicator={false}
-            showsHorizontalScrollIndicator={false}
-          />
-        </ScrollView>
+        <FlatList
+          style={{ marginLeft: -10, height: "100%" }}
+          data={sheets}
+          renderItem={(sheet) => (
+            <SheetCard
+              sheet={sheet.item}
+              first={
+                sheet.index == 0 ||
+                sheet.index % Math.ceil(Dimensions.get("window").width / 200) ==
+                  0
+              }
+            />
+          )}
+          keyExtractor={(sheet) => sheet.safeSheetName}
+          contentContainerStyle={{ alignSelf: "flex-start" }}
+          numColumns={
+            Math.ceil(
+              Dimensions.get("window").width / 200
+            ) /* Est. width of sheet is 200 */
+          }
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+        />
       </View>
     </View>
   );

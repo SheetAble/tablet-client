@@ -43,31 +43,30 @@ export default function ComposersScreen() {
         <Text style={globalStyles.vollkornHeadline}>
           Composers by newest uploads
         </Text>
-        <ScrollView style={{ marginLeft: -10, height: "100%" }}>
-          <FlatList
-            data={composers}
-            renderItem={(composer) => (
-              <ComposerCard
-                composer={composer.item}
-                first={
-                  composer.index == 0 ||
-                  composer.index %
-                    Math.ceil(Dimensions.get("window").width / 190) ==
-                    0
-                }
-              />
-            )}
-            keyExtractor={(composer) => composer.safeName}
-            contentContainerStyle={{ alignSelf: "flex-start" }}
-            numColumns={
-              Math.ceil(
-                Dimensions.get("window").width / 190
-              ) /* Est. width of sheet is 200 */
-            }
-            showsVerticalScrollIndicator={false}
-            showsHorizontalScrollIndicator={false}
-          />
-        </ScrollView>
+        <FlatList
+          style={{ marginLeft: -10, height: "100%" }}
+          data={composers}
+          renderItem={(composer) => (
+            <ComposerCard
+              composer={composer.item}
+              first={
+                composer.index == 0 ||
+                composer.index %
+                  Math.ceil(Dimensions.get("window").width / 190) ==
+                  0
+              }
+            />
+          )}
+          keyExtractor={(composer) => composer.safeName}
+          contentContainerStyle={{ alignSelf: "flex-start" }}
+          numColumns={
+            Math.ceil(
+              Dimensions.get("window").width / 190
+            ) /* Est. width of sheet is 200 */
+          }
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+        />
       </View>
     </View>
   );

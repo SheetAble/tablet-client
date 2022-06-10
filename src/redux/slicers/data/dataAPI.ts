@@ -152,8 +152,6 @@ export async function getComposersAPICall({
   limit?: string;
 }): Promise<Composer[]> {
   try {
-    console.log("get Composers");
-
     const formData = new FormData();
     formData.append("sort_by", sortBy ? sortBy : "updated_at desc");
     formData.append("page", page ? page : "1");
