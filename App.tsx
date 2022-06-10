@@ -126,6 +126,7 @@ function TabNavigator() {
           ),
         }}
       />
+      {/* Not implemented yet:
       <Tab.Screen
         name="Collections"
         component={CollectionsScreen}
@@ -141,7 +142,7 @@ function TabNavigator() {
             />
           ),
         }}
-      />
+      />*/}
       <Tab.Screen
         name="Settings"
         component={SettingsScreen}
