@@ -5,7 +5,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { loadFonts } from "./src/utils/loadFonts";
 import HomeScreen from "./src/screens/mainScreens/HomeScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import CounterScreen from "./src/screens/mainScreens/CounterScreen";
 import ComposersScreen from "./src/screens/mainScreens/ComposersScreen";
 import SheetsScreen from "./src/screens/mainScreens/SheetsScreen";
 import SettingsScreen from "./src/screens/mainScreens/SettingsScreen";
@@ -18,6 +17,7 @@ import axios from "axios";
 import { createStackNavigator } from "@react-navigation/stack";
 import SheetScreen from "./src/screens/functionalScreens/SheetScreen";
 import { RootStackParamList } from "./src/screens/RootStackParams";
+import SignInScreen from "./src/screens/authScreens/SignInScreen";
 
 const Tab = createBottomTabNavigator<RootStackParamList>();
 const Stack = createStackNavigator<RootStackParamList>();
@@ -60,6 +60,14 @@ export default function App() {
             options={({ route }) => ({
               title: `Sheet - ${route.params.sheetName}`,
             })}
+          />
+          <Stack.Screen
+            name="SignIn"
+            component={SignInScreen}
+            options={{
+              headerShown: false,
+              gestureEnabled: false,
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>

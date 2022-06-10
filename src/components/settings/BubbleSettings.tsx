@@ -2,8 +2,17 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import { colors, globalStyles } from "../../constants/GlobalStyleSheet";
 import { TouchableHighlight } from "react-native-gesture-handler";
+import { RootStackParamList } from "../../screens/RootStackParams";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useNavigation } from "@react-navigation/native";
 
 const BubbleSettings = () => {
+  type settingsScreenProp = NativeStackNavigationProp<
+    RootStackParamList,
+    "Settings"
+  >;
+  const navigation = useNavigation<settingsScreenProp>();
+
   return (
     <View style={[styles.container, styles.firstItem]}>
       <View style={styles.settingContainer}>
@@ -12,7 +21,11 @@ const BubbleSettings = () => {
         </TouchableOpacity>
       </View>
       <View style={[styles.settingContainer, styles.lastItem]}>
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("SignIn");
+          }}
+        >
           <Text style={styles.settingText}>Log out</Text>
         </TouchableOpacity>
       </View>
@@ -25,7 +38,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.WHITESMOKE,
     padding: 10,
     borderRadius: 15,
-    marginTop: 50,
+    marginTop: 20,
     marginHorizontal: 20,
   },
   settingContainer: {

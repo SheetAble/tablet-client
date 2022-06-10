@@ -14,4 +14,7 @@ export type RootStackParamList = {
 
   // Functional Screens
   Sheet: Sheet;
+
+  // Auth Screens
+  SignIn: undefined;
 };
