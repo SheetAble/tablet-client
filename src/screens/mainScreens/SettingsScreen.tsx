@@ -1,4 +1,5 @@
 import { Button, StyleSheet, Text, View } from "react-native";
+import SettingsSelector from "../../components/settings/SettingsSelector";
 import {
   getComposersAsync,
   getSheetsAsync,
@@ -14,9 +15,7 @@ import { syncAll } from "../../utils/callMethods";
 export default function SettingsScreen() {
   return (
     <View style={styles.settingsScreenContainer}>
-      <View style={styles.settingsSelectorContainer}>
-        <Text>Settings Selector</Text>
-      </View>
+      <SettingsSelector />
       <View style={styles.settingsDisplayContainer}>
         <Text>Settings Display</Text>
       </View>
@@ -30,8 +29,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flex: 1,
   },
-  settingsSelectorContainer: {
-    flex: 0.7,
-  },
+
   settingsDisplayContainer: {},
 });
