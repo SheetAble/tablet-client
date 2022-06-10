@@ -4,6 +4,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { colors, globalStyles } from "../../constants/GlobalStyleSheet";
 import { ScrollView } from "react-native-gesture-handler";
 import BubbleSettings from "./BubbleSettings";
+import { nativeApplicationVersion } from "expo-application";
 
 const SettingsSelector = () => {
   return (
@@ -20,7 +21,7 @@ const SettingsSelector = () => {
           <BubbleSettings />
         </View>
 
-        <Text style={styles.version}>v0.0.1</Text>
+        <Text style={styles.version}>v{nativeApplicationVersion}</Text>
       </ScrollView>
     </View>
   );
@@ -28,7 +29,7 @@ const SettingsSelector = () => {
 
 const styles = StyleSheet.create({
   settingsSelectorContainer: {
-    flex: 0.5,
+    flex: 0.7,
     marginLeft: 20,
   },
   optionsContainer: {
