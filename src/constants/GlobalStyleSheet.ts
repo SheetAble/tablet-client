@@ -24,6 +24,10 @@ export const globalStyles = StyleSheet.create({
   },
 
   // Typograhpy
+  nunitoSansLargeTitle: {
+    fontFamily: "NunitoSans_800ExtraBold",
+    fontSize: 72,
+  },
   nunitoSansTitle1: {
     fontFamily: "NunitoSans_700Bold",
     fontSize: 60,
