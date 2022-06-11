@@ -3,13 +3,13 @@ import { RootState, useAppDispatch } from "../../store";
 import { getSheetsByComposerAPICall } from "../data/dataAPI";
 import { Composer, Sheet } from "../data/dataSlice";
 
-interface SheetsState {
+interface UIState {
   detailedPreview: Composer | undefined;
   detailedPreviewSheets: Sheet[];
   status: "idle" | "loading" | "failed";
 }
 
-const initialState: SheetsState = {
+const initialState: UIState = {
   detailedPreview: undefined,
   detailedPreviewSheets: [],
   status: "idle",

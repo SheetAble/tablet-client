@@ -1,9 +1,12 @@
 import { Provider } from "react-redux";
-import { store } from "./src/redux/store";
+import { persistor, store } from "./src/redux/store";
 import { View, Text, LogBox } from "react-native";
 import { loadFonts } from "./src/utils/loadFonts";
 import axios from "axios";
 import MainNav from "./src/navigator/MainNav";
+import { PersistGate } from "redux-persist/integration/react";
+import { useEffect } from "react";
+import * as SecureStore from "expo-secure-store";
 
 export default function App() {
   axios.defaults.baseURL = "http://192.168.0.65:8080/api";
@@ -12,6 +15,13 @@ export default function App() {
   LogBox.ignoreLogs([
     "ViewPropTypes will be removed from React Native. Migrate to ViewPropTypes exported from 'deprecated-react-native-prop-types'.",
   ]);
+
+  useEffect(() => {
+    // Set default header from secure Token
+    SecureStore.getItemAsync("jwtToken").then((val) => {
+      axios.defaults.headers.common["Authorization"] = "Bearer " + val;
+    });
+  });
 
   if (!loadFonts()) {
     return (
@@ -23,7 +33,9 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <MainNav />
+      <PersistGate loading={null} persistor={persistor}>
+        <MainNav />
+      </PersistGate>
     </Provider>
   );
 }

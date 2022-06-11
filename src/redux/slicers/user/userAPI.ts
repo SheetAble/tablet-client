@@ -1,4 +1,5 @@
 import axios from "axios";
+import * as SecureStore from "expo-secure-store";
 
 export async function loginAPICall() {
   try {
@@ -10,6 +11,9 @@ export async function loginAPICall() {
     if (status != 200) {
       return false;
     }
+
+    // Set jwt Token to secureStore
+    await SecureStore.setItemAsync("jwtToken", data);
     axios.defaults.headers.common["Authorization"] = "Bearer " + data;
 
     return true;
