@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, TouchableOpacity, Button } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { colors, globalStyles } from "../../constants/GlobalStyleSheet";
 import { nativeApplicationVersion } from "expo-application";
 import { TextInput } from "react-native-gesture-handler";
@@ -9,18 +9,14 @@ import { RootStackParamList } from "../RootStackParams";
 import { useDispatch } from "react-redux";
 import { loginAsync } from "../../redux/slicers/user/userSlice";
 import { useAppDispatch } from "../../redux/store";
+import { isLandscape } from "../../utils/rnMethods";
 
 export default function SignInScreen() {
-  type signInScreenProp = NativeStackNavigationProp<
-    RootStackParamList,
-    "Settings"
-  >;
-  const navigation = useNavigation<signInScreenProp>();
   const dispatch = useAppDispatch();
 
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
-      <View style={styles.container}>
+      <View style={isLandscape() ? { marginTop: "20%" } : { marginTop: "30%" }}>
         <View style={{ flexDirection: "row", alignSelf: "center" }}>
           <Text style={styles.headerText}>
             Sheet<Text style={{ color: colors.BLUE10 }}>Able</Text>
@@ -97,7 +93,7 @@ const styles = StyleSheet.create({
   },
   recoverPassword: {
     ...globalStyles.nunitoSansBodyBold,
-    color: colors.GRAY6,
+    color: colors.GRAY8,
     textAlign: "right",
     marginTop: 10,
   },
