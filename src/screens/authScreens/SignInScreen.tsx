@@ -6,6 +6,9 @@ import { TextInput } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../RootStackParams";
+import { useDispatch } from "react-redux";
+import { loginAsync } from "../../redux/slicers/user/userSlice";
+import { useAppDispatch } from "../../redux/store";
 
 export default function SignInScreen() {
   type signInScreenProp = NativeStackNavigationProp<
@@ -13,6 +16,7 @@ export default function SignInScreen() {
     "Settings"
   >;
   const navigation = useNavigation<signInScreenProp>();
+  const dispatch = useAppDispatch();
 
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
@@ -45,7 +49,7 @@ export default function SignInScreen() {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.signInButton}
-            onPress={() => navigation.navigate("HomeFeed")}
+            onPress={() => dispatch(loginAsync())}
           >
             <Text style={styles.signInButtonText}>Sign In</Text>
           </TouchableOpacity>

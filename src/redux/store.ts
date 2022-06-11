@@ -1,5 +1,4 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import counterReducer from "./slicers/counter/counterSlice";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import userListSlice from "./slicers/userList/userListSlice";
 import dataSlice from "./slicers/data/dataSlice";
@@ -8,7 +7,6 @@ import uiSlice from "./slicers/ui/uiSlice";
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
     userlist: userListSlice,
     data: dataSlice,
     user: userSlice,

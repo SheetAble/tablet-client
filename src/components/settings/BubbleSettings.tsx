@@ -5,13 +5,11 @@ import { TouchableHighlight } from "react-native-gesture-handler";
 import { RootStackParamList } from "../../screens/RootStackParams";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useNavigation } from "@react-navigation/native";
+import { useAppDispatch } from "../../redux/store";
+import { setAuthenticatedFalse } from "../../redux/slicers/user/userSlice";
 
 const BubbleSettings = () => {
-  type settingsScreenProp = NativeStackNavigationProp<
-    RootStackParamList,
-    "Settings"
-  >;
-  const navigation = useNavigation<settingsScreenProp>();
+  const dispatch = useAppDispatch();
 
   return (
     <View style={[styles.container, styles.firstItem]}>
@@ -23,7 +21,7 @@ const BubbleSettings = () => {
       <View style={[styles.settingContainer, styles.lastItem]}>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate("SignIn");
+            dispatch(setAuthenticatedFalse());
           }}
         >
           <Text style={styles.settingText}>Log out</Text>

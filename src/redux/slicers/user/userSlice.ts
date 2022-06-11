@@ -10,13 +10,13 @@ type UserData = {
   updatedAt: Date;
 };
 
-interface SheetsState {
+interface UserState {
   authenticated: boolean;
   status: "idle" | "loading" | "failed";
   userData: UserData | undefined;
 }
 
-const initialState: SheetsState = {
+const initialState: UserState = {
   authenticated: false,
   status: "idle",
   userData: undefined,
@@ -24,10 +24,14 @@ const initialState: SheetsState = {
 
 export const loginAsync = createAsyncThunk("user/login", loginAPICall);
 
-export const dataSlice = createSlice({
-  name: "data",
+export const userSlice = createSlice({
+  name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    setAuthenticatedFalse: (state: UserState) => {
+      state.authenticated = false;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(loginAsync.pending, (state) => {
@@ -44,10 +48,10 @@ export const dataSlice = createSlice({
   },
 });
 
-export const {} = dataSlice.actions;
+export const { setAuthenticatedFalse } = userSlice.actions;
 
 export const selectAuthenticated = (state: RootState) =>
   state.user.authenticated;
 export const selectDataStatus = (state: RootState) => state.user.status;
 
-export default dataSlice.reducer;
+export default userSlice.reducer;

@@ -21,7 +21,7 @@ export const addDetailedPreviewAsync = createAsyncThunk(
 );
 
 export const uiSlice = createSlice({
-  name: "data",
+  name: "ui",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
