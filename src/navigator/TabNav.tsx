@@ -3,7 +3,7 @@ import TabScreenText from "../components/utils/TabScreenText";
 import HomeScreen from "../screens/mainScreens/HomeScreen";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import SheetScreen from "../screens/functionalScreens/SheetScreen";
+import SheetsScreen from "../screens/mainScreens/SheetsScreen";
 import { colors } from "../constants/GlobalStyleSheet";
 import { RootStackParamList } from "../screens/RootStackParams";
 import ComposersScreen from "../screens/mainScreens/ComposersScreen";
@@ -40,7 +40,7 @@ export default function TabNavigator() {
       />
       <Tab.Screen
         name="Sheets"
-        component={SheetScreen}
+        component={SheetsScreen}
         options={{
           tabBarLabel: ({ focused }) => (
             <TabScreenText focused={focused} label="Sheets" />

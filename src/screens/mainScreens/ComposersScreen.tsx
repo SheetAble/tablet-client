@@ -12,6 +12,7 @@ import SheetCard from "../../components/sheets/SheetCard";
 import { globalStyles } from "../../constants/GlobalStyleSheet";
 import {
   getComposersAsync,
+  getComposersPageAsync,
   getSheetsAsync,
   selectComposers,
   selectComposersPage,
@@ -22,10 +23,20 @@ import { useAppDispatch, useAppSelector } from "../../redux/store";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { syncAll } from "../../utils/callMethods";
 import ComposerCard from "../../components/composers/ComposerCard";
+import { useEffect, useState } from "react";
 
 export default function ComposersScreen() {
   const composers = useAppSelector(selectComposersPage);
   const dispatch = useAppDispatch();
+
+  const [firstLoad, setfirstLoad] = useState(true);
+
+  useEffect(() => {
+    if (composers.length == 0 && firstLoad) {
+      dispatch(getComposersPageAsync({ limit: "1000" }));
+      setfirstLoad(false);
+    }
+  });
 
   return (
     <View style={styles.mainWrapper}>

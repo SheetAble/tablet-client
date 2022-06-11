@@ -13,16 +13,26 @@ import { globalStyles } from "../../constants/GlobalStyleSheet";
 import {
   getComposersAsync,
   getSheetsAsync,
+  getSheetsPageAsync,
   selectSheets,
   selectSheetsPage,
 } from "../../redux/slicers/data/dataSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { syncAll } from "../../utils/callMethods";
+import { useEffect, useState } from "react";
 
 export default function SheetsScreen() {
   const sheets = useAppSelector(selectSheetsPage);
   const dispatch = useAppDispatch();
+  const [firstLoad, setfirstLoad] = useState(true);
+
+  useEffect(() => {
+    if (sheets.length == 0 && firstLoad) {
+      dispatch(getSheetsPageAsync({ limit: "1000" }));
+      setfirstLoad(false);
+    }
+  });
 
   return (
     <View style={styles.mainWrapper}>

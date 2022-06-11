@@ -1,12 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { globalStyles } from "../../constants/GlobalStyleSheet";
 import {
   getComposersAsync,
   getSheetsAsync,
+  selectComposers,
+  selectSheets,
 } from "../../redux/slicers/data/dataSlice";
-import { useAppDispatch } from "../../redux/store";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { syncAll } from "../../utils/callMethods";
 import RecentlyAddedComposers from "../composers/RecentlyAddedComposers";
 import SearchBar from "../searchBar/SearchBar";
@@ -14,10 +16,18 @@ import RecentlyAddedSheets from "../sheets/RecentlyAddedSheets";
 
 export default function HomeFeedOverview() {
   const dispatch = useAppDispatch();
+  const sheets = useAppSelector(selectSheets);
+  const composers = useAppSelector(selectComposers);
+
+  // To dispatch only once when firstload is false
+  const [firstLoad, setfirstLoad] = useState(true);
 
   useEffect(() => {
-    //dispatch(getSheetsAsync());
-    //dispatch(getComposersAsync());
+    if ((sheets.length == 0 || composers.length == 0) && firstLoad) {
+      dispatch(getSheetsAsync({}));
+      dispatch(getComposersAsync({}));
+      setfirstLoad(false);
+    }
   });
 
   return (
