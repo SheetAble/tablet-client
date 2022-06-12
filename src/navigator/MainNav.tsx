@@ -1,5 +1,5 @@
 import { View, Text } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { RootStackParamList } from "../screens/RootStackParams";
 import { NavigationContainer } from "@react-navigation/native";
@@ -7,13 +7,21 @@ import { colors } from "../constants/GlobalStyleSheet";
 import SheetScreen from "../screens/functionalScreens/SheetScreen";
 import SignInScreen from "../screens/authScreens/SignInScreen";
 import TabNavigator from "./TabNav";
-import { useAppSelector } from "../redux/store";
+import { useAppDispatch, useAppSelector } from "../redux/store";
 import { selectAuthenticated } from "../redux/slicers/user/userSlice";
+import { selectServerURL, setServerURL } from "../redux/slicers/ui/uiSlice";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
 export default function MainNav() {
   const authenticated = useAppSelector(selectAuthenticated);
+  const serverURL = useAppSelector(selectServerURL);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    // Default set of serverURL to clear up the default case
+    dispatch(setServerURL(serverURL));
+  });
 
   return (
     <NavigationContainer>

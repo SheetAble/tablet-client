@@ -1,4 +1,11 @@
-import { View, Text, StyleSheet, TouchableOpacity, Button } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Button,
+  Modal,
+} from "react-native";
 import React, { useState } from "react";
 import { colors, globalStyles } from "../../constants/GlobalStyleSheet";
 import { nativeApplicationVersion } from "expo-application";
@@ -10,12 +17,34 @@ import { useDispatch } from "react-redux";
 import { loginAsync } from "../../redux/slicers/user/userSlice";
 import { useAppDispatch } from "../../redux/store";
 import { isLandscape } from "../../utils/rnMethods";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import SetBaseServerURLModal from "../../components/modals/SetBaseServerURLModal";
 
 export default function SignInScreen() {
   const dispatch = useAppDispatch();
+  const [serverSettingsModalShow, setServerSettingsModalShow] = useState(false);
 
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
+      <Ionicons
+        name="md-settings-sharp"
+        color={colors.GRAY7}
+        size={25}
+        style={styles.settingsIconStyle}
+        onPress={() => setServerSettingsModalShow(true)}
+      />
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={serverSettingsModalShow}
+        onRequestClose={() => {
+          setServerSettingsModalShow(!serverSettingsModalShow);
+        }}
+      >
+        <SetBaseServerURLModal
+          setServerSettingsModalShow={setServerSettingsModalShow}
+        />
+      </Modal>
       <View style={isLandscape() ? { marginTop: "20%" } : { marginTop: "30%" }}>
         <View style={{ flexDirection: "row", alignSelf: "center" }}>
           <Text style={styles.headerText}>
@@ -109,5 +138,9 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     fontSize: 27,
+  },
+  settingsIconStyle: {
+    marginTop: 20,
+    marginLeft: 20,
   },
 });
