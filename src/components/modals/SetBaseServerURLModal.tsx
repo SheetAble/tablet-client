@@ -1,27 +1,47 @@
 import { View, Text, StyleSheet, Pressable, Button } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { TextInput } from "react-native-gesture-handler";
 import { colors, globalStyles } from "../../constants/GlobalStyleSheet";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
+import { selectServerURL, setServerURL } from "../../redux/slicers/ui/uiSlice";
 
 export default function SetBaseServerURLModal({
   setServerSettingsModalShow,
 }: {
   setServerSettingsModalShow: Function;
 }) {
+  const serverURL = useAppSelector(selectServerURL);
+  const [serverURLValue, setServerURLValue] = useState(serverURL.slice(0, -4));
+  const dispatch = useAppDispatch();
+
   return (
     <View style={styles.centeredView}>
       <View style={styles.modalView}>
-        <Ionicons
-          name="close"
-          color={colors.GRAY7}
-          size={25}
-          style={styles.closeIconStyle}
-          onPress={() => setServerSettingsModalShow(false)}
+        <View style={styles.topbarContainer}>
+          <Text style={styles.labelText}>Change base server URL</Text>
+          <Ionicons
+            name="close"
+            color={colors.GRAY8}
+            size={25}
+            onPress={() => setServerSettingsModalShow(false)}
+          />
+        </View>
+        <TextInput
+          style={styles.textInput}
+          placeholder="Enter Server URL"
+          value={serverURLValue}
+          onChangeText={(val) => setServerURLValue(val)}
         />
-        <TextInput style={styles.textInput} placeholder="Enter Server URL" />
         <View style={styles.buttonContainer}>
-          <Button title="Save" onPress={() => {}} color="white" />
+          <Button
+            title="Save"
+            onPress={() => {
+              dispatch(setServerURL(serverURLValue + "/api"));
+              setServerSettingsModalShow(false);
+            }}
+            color="white"
+          />
         </View>
       </View>
     </View>
@@ -50,10 +70,16 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  closeIconStyle: {
-    alignSelf: "flex-end",
-    marginBottom: -15,
+  topbarContainer: {
+    marginBottom: -20,
     marginTop: -15,
+    flexDirection: "row",
+    alignSelf: "stretch",
+    justifyContent: "space-between",
+  },
+  labelText: {
+    ...globalStyles.nunitoSansBody,
+    color: colors.GRAY5,
   },
   textInput: {
     alignSelf: "center",
@@ -71,7 +97,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     backgroundColor: colors.BLUE7,
     marginTop: 20,
-    paddingHorizontal: 50,
+    paddingHorizontal: 70,
     borderRadius: 14,
   },
 });

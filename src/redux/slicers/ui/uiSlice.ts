@@ -28,7 +28,7 @@ export const uiSlice = createSlice({
   initialState,
   reducers: {
     setServerURL: (state: UIState, action: PayloadAction<string>) => {
-      axios.defaults.baseURL = "http://192.168.0.65:8080/api";
+      axios.defaults.baseURL = action.payload;
       state.serverURL = action.payload;
     },
   },
