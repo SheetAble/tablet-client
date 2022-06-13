@@ -3,6 +3,7 @@ import React from "react";
 import { colors, globalStyles } from "../../constants/GlobalStyleSheet";
 import { useAppSelector } from "../../redux/store";
 import {
+  Composer,
   selectComposers,
   selectSheets,
 } from "../../redux/slicers/data/dataSlice";
@@ -18,8 +19,12 @@ export default function RecentlyAddedComposers() {
         Recently Added Composers
       </Text>
       <ScrollView horizontal={true} style={styles.sheetsList}>
-        {composers.map((composer, index) => (
-          <ComposerCard composer={composer} first={index == 0} key={composer.safeName} />
+        {composers.map((composer: Composer, index: number) => (
+          <ComposerCard
+            composer={composer}
+            first={index == 0}
+            key={composer.safeName}
+          />
         ))}
       </ScrollView>
     </View>

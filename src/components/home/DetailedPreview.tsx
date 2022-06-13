@@ -15,7 +15,7 @@ import {
   selectDetailedPreview,
   selectDetailedPreviewSheets,
 } from "../../redux/slicers/ui/uiSlice";
-import { selectComposers } from "../../redux/slicers/data/dataSlice";
+import { selectComposers, Sheet } from "../../redux/slicers/data/dataSlice";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -63,7 +63,14 @@ export default function DetailedPreview() {
               {detailedPreviewComposer.epoch}
             </Text>
           </View>
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate(
+                "DetailedComposerView",
+                detailedPreviewComposer
+              );
+            }}
+          >
             <View style={styles.buttonContainer}>
               <Ionicons
                 name="play"
@@ -89,8 +96,13 @@ export default function DetailedPreview() {
 
         <Text style={styles.uploadedWorksTitle}>Uploaded Works</Text>
         <ScrollView style={styles.uploadedWorks}>
-          {detailedPreviewSheets.map((sheet) => (
-            <TouchableOpacity key={sheet.safeSheetName} onPress={() => {navigation.navigate("Sheet", sheet)}}>
+          {detailedPreviewSheets.map((sheet: Sheet) => (
+            <TouchableOpacity
+              key={sheet.safeSheetName}
+              onPress={() => {
+                navigation.navigate("Sheet", sheet);
+              }}
+            >
               <View style={styles.uploadedWorksContainer}>
                 <Text style={styles.uploadedWorksText}>{sheet.sheetName}</Text>
               </View>

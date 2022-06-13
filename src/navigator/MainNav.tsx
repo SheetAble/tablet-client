@@ -10,6 +10,7 @@ import TabNavigator from "./TabNav";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import { selectAuthenticated } from "../redux/slicers/user/userSlice";
 import { selectServerURL, setServerURL } from "../redux/slicers/ui/uiSlice";
+import DetailedComposerViewScreen from "../screens/functionalScreens/DetailedComposerViewScreen";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -44,6 +45,13 @@ export default function MainNav() {
               component={SheetScreen}
               options={({ route }) => ({
                 title: `Sheet - ${route.params.sheetName}`,
+              })}
+            />
+            <Stack.Screen
+              name="DetailedComposerView"
+              component={DetailedComposerViewScreen}
+              options={({ route }) => ({
+                title: `Composer - ${route.params.name}`,
               })}
             />
           </>

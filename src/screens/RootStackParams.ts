@@ -1,4 +1,4 @@
-import { Sheet } from "../redux/slicers/data/dataSlice";
+import { Composer, Sheet } from "../redux/slicers/data/dataSlice";
 
 export type RootStackParamList = {
   // TabNavigator Root
@@ -14,6 +14,7 @@ export type RootStackParamList = {
 
   // Functional Screens
   Sheet: Sheet;
+  DetailedComposerView: Composer;
 
   // Auth Screens
   SignIn: undefined;

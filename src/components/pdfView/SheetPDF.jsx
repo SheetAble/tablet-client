@@ -3,10 +3,7 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Dimensions, View } from "react-native";
 import Pdf from "react-native-pdf";
 
-
 export default function SheetPDF({ sheet }) {
-
-
   const source = {
     uri: `${axios.defaults.baseURL}/${sheet.pdfUrl}`,
     cache: true,
@@ -21,20 +18,25 @@ export default function SheetPDF({ sheet }) {
   return (
     <View style={styles.container}>
       <Pdf
-        ref={(pdf) => {setPdf(pdf)}}
+        ref={(pdf) => {
+          setPdf(pdf);
+        }}
         source={source}
         onLoadComplete={(numberOfPages, filePath) => {}}
         onPageChanged={(page, numberOfPages) => {}}
-        onError={(error) => {console.log(error);}}
+        onError={(error) => {
+          console.log(error);
+        }}
         style={styles.pdf}
         enablePaging={true}
         horizontal={true}
-        
-
+        trustAllCerts={false /* otherwise android throws an error */}
         onPageSingleTap={(page, x, y) => {
           if (x > 500) {
             pdf.setPage((page += 1));
-          } else {pdf.setPage((page -= 1));}
+          } else {
+            pdf.setPage((page -= 1));
+          }
         }}
       />
     </View>
