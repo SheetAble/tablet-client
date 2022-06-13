@@ -20,7 +20,7 @@ export async function loginAPICall() {
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.log("error message: ", error.message);
-      console.log(error.cause);
+      console.log(error);
       return false;
     } else {
       console.log("unexpected error: ", error);
