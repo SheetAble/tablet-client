@@ -6,7 +6,7 @@ import { Composer, Sheet } from "../data/dataSlice";
 
 interface UIState {
   detailedPreview: Composer | undefined;
-  detailedPreviewSheets: Sheet[];
+  detailedPreviewSheets: Sheet[] /* Sheets By Composer */;
   status: "idle" | "loading" | "failed";
   serverURL: string;
 }

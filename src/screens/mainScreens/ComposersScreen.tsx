@@ -11,6 +11,7 @@ import RecentlyAddedSheets from "../../components/sheets/RecentlyAddedSheets";
 import SheetCard from "../../components/sheets/SheetCard";
 import { globalStyles } from "../../constants/GlobalStyleSheet";
 import {
+  Composer,
   getComposersAsync,
   getComposersPageAsync,
   getSheetsAsync,
@@ -24,12 +25,21 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { syncAll } from "../../utils/callMethods";
 import ComposerCard from "../../components/composers/ComposerCard";
 import { useEffect, useState } from "react";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../RootStackParams";
+import { useNavigation } from "@react-navigation/native";
 
 export default function ComposersScreen() {
   const composers = useAppSelector(selectComposersPage);
   const dispatch = useAppDispatch();
 
   const [firstLoad, setfirstLoad] = useState(true);
+
+  type composerScreenProp = NativeStackNavigationProp<
+    RootStackParamList,
+    "Composers"
+  >;
+  const navigation = useNavigation<composerScreenProp>();
 
   useEffect(() => {
     if (composers.length == 0 && firstLoad) {
@@ -66,6 +76,9 @@ export default function ComposersScreen() {
                   Math.ceil(Dimensions.get("window").width / 190) ==
                   0
               }
+              callNav={(composer: Composer) => {
+                navigation.navigate("DetailedComposerView", composer);
+              }}
             />
           )}
           keyExtractor={(composer) => composer.safeName}

@@ -56,6 +56,7 @@ export default function SheetsScreen() {
           renderItem={(sheet) => (
             <SheetCard
               sheet={sheet.item}
+              momentumScroll={false}
               first={
                 sheet.index == 0 ||
                 sheet.index % Math.ceil(Dimensions.get("window").width / 200) ==

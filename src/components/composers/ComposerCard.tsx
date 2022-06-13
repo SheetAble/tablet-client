@@ -12,13 +12,18 @@ import axios from "axios";
 import { colors, globalStyles } from "../../constants/GlobalStyleSheet";
 import { useAppDispatch } from "../../redux/store";
 import { addDetailedPreviewAsync } from "../../redux/slicers/ui/uiSlice";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 export default function ComposerCard({
   composer,
   first,
+  isHomeFeed,
+  callNav,
 }: {
   composer: Composer;
   first: boolean;
+  isHomeFeed?: boolean;
+  callNav?: Function; // Only necessary when not using the home UI
 }) {
   // To remove shadow when button is pressed
   const [isPressed, setIsPressed] = useState(false);
@@ -28,7 +33,11 @@ export default function ComposerCard({
     <TouchableWithoutFeedback
       onPressIn={() => {
         setIsPressed(true);
-        dispatch(addDetailedPreviewAsync(composer));
+        if (isHomeFeed && isHomeFeed != undefined) {
+          return dispatch(addDetailedPreviewAsync(composer));
+        }
+
+        callNav != undefined && callNav(composer);
       }}
       onPressOut={() => setIsPressed(false)}
       key={composer.safeName}
