@@ -1,10 +1,19 @@
 import { View, Text, StyleSheet, TextInput } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { colors, globalStyles } from "../../constants/GlobalStyleSheet";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
+import {
+  emptySearchResults,
+  selectSearchResults,
+  setIsSearchActive,
+  setSearchResultsAsync,
+} from "../../redux/slicers/ui/uiSlice";
 
-export default function SearchBar({ placeholder } : { placeholder?: string }) {
+export default function SearchBar({ placeholder }: { placeholder?: string }) {
   const [searchString, setSearchString] = useState("");
+  const dispatch = useAppDispatch();
+  const searchResults = useAppSelector(selectSearchResults);
 
   return (
     <View style={styles.searchSection}>
@@ -16,10 +25,22 @@ export default function SearchBar({ placeholder } : { placeholder?: string }) {
       />
       <TextInput
         style={styles.input}
-        placeholder={placeholder ? placeholder : "Search for Sheets or Composers"}
+        placeholder={
+          placeholder ? placeholder : "Search for Sheets or Composers"
+        }
         onChangeText={(searchString) => {
           setSearchString(searchString);
+          if (searchString == "") {
+            dispatch(emptySearchResults());
+            return;
+          }
+          dispatch(setSearchResultsAsync(searchString));
         }}
+        onBlur={() => {
+          dispatch(emptySearchResults());
+          dispatch(setIsSearchActive(false));
+        }}
+        onFocus={() => dispatch(setIsSearchActive(true))}
         underlineColorAndroid="transparent"
         placeholderTextColor={colors.GRAY5}
       />

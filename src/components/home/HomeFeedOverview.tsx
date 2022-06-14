@@ -8,17 +8,23 @@ import {
   selectComposers,
   selectSheets,
 } from "../../redux/slicers/data/dataSlice";
+import {
+  selecetIsSearchActive,
+  selectSearchResults,
+} from "../../redux/slicers/ui/uiSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { syncAll } from "../../utils/callMethods";
 import RecentlyAddedComposers from "../composers/RecentlyAddedComposers";
 import SearchBar from "../searchBar/SearchBar";
+import SearchResultsSheets from "../searchBar/SearchResultsSheets";
 import RecentlyAddedSheets from "../sheets/RecentlyAddedSheets";
 
 export default function HomeFeedOverview() {
   const dispatch = useAppDispatch();
   const sheets = useAppSelector(selectSheets);
   const composers = useAppSelector(selectComposers);
-
+  const searchResults = useAppSelector(selectSearchResults);
+  const isSearchActive = useAppSelector(selecetIsSearchActive);
   // To dispatch only once when firstload is false
   const [firstLoad, setfirstLoad] = useState(true);
 
@@ -28,6 +34,7 @@ export default function HomeFeedOverview() {
       dispatch(getComposersAsync({}));
       setfirstLoad(false);
     }
+    console.log(isSearchActive);
   });
 
   return (
@@ -48,8 +55,14 @@ export default function HomeFeedOverview() {
           marginRight: -20 /* For the shadow of the cards*/,
         }}
       >
-        <RecentlyAddedSheets />
-        <RecentlyAddedComposers />
+        {isSearchActive ? (
+          <SearchResultsSheets sheets={searchResults} />
+        ) : (
+          <>
+            <RecentlyAddedSheets />
+            <RecentlyAddedComposers />
+          </>
+        )}
       </ScrollView>
     </View>
   );

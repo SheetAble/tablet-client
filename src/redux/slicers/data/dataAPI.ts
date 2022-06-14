@@ -190,3 +190,39 @@ export async function getComposersAPICall({
     }
   }
 }
+
+export async function searchSheetsAPICall(
+  searchValue: string
+): Promise<Sheet[]> {
+  try {
+    const { data } = await axios.get<SheetResponse[]>("/search/" + searchValue);
+
+    let sheets: Sheet[] = [];
+    for (let i = 0; i < data.length; i++) {
+      sheets.push({
+        safeSheetName: data[i].safe_sheet_name,
+        sheetName: data[i].sheet_name,
+        safeComposer: data[i].safe_composer,
+        composer: data[i].composer,
+        releaseDate: data[i].ReleaseDate,
+        pdfUrl: data[i].pdf_url,
+        uploaderId: data[i].uploader_id,
+        createdAt: data[i].created_at,
+        updatedAt: data[i].updated_at,
+        tags: data[i].tags,
+        informationText: data[i].information_text,
+      });
+    }
+
+    return sheets;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.log("error message: ", error.message);
+      console.log(error.cause);
+      return [];
+    } else {
+      console.log("unexpected error: ", error);
+      return [];
+    }
+  }
+}
