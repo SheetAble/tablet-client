@@ -1,10 +1,13 @@
 {
   "expo": {
-    "name": "mobile-client",
-    "slug": "mobile-client",
+    "name": "SheetAble",
+    "slug": "sheetable-tablet-client",
+    "description": "The tablet-client for SheetAble servers",
+    "owner": "vallezw",
+    "githubUrl": "https://github.com/SheetAble/tablet-client",
     "version": "0.0.1",
     "orientation": "default",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -17,6 +20,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
+      "isTabletOnly": true,
       "bundleIdentifier": "net.sheetable.tablet-client"
     },
     "android": {
@@ -24,7 +28,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.vallezw.mobileclient",
+      "package": "net.sheetable.tablet-client",
       "permissions": [
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE",
