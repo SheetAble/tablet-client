@@ -1,4 +1,4 @@
-package com.vallezw.mobileclient;
+package net.sheetable.tabletclient;
 
 import android.os.Build;
 import android.os.Bundle;

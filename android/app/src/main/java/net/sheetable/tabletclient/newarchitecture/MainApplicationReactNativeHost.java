@@ -1,4 +1,4 @@
-package com.vallezw.mobileclient.newarchitecture;
+package net.sheetable.tabletclient.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.EmptyReactNativeConfig;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.vallezw.mobileclient.BuildConfig;
-import com.vallezw.mobileclient.newarchitecture.components.MainComponentsRegistry;
-import com.vallezw.mobileclient.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import net.sheetable.tabletclient.BuildConfig;
+import net.sheetable.tabletclient.newarchitecture.components.MainComponentsRegistry;
+import net.sheetable.tabletclient.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

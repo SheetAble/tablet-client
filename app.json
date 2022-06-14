@@ -21,14 +21,14 @@
     "ios": {
       "supportsTablet": true,
       "isTabletOnly": true,
-      "bundleIdentifier": "net.sheetable.tablet-client"
+      "bundleIdentifier": "net.sheetable.tabletclient"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "net.sheetable.tablet-client",
+      "package": "net.sheetable.tabletclient",
       "permissions": [
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE",

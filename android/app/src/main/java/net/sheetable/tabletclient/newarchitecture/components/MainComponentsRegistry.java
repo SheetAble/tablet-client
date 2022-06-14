@@ -1,4 +1,4 @@
-package com.vallezw.mobileclient.newarchitecture.components;
+package net.sheetable.tabletclient.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;
