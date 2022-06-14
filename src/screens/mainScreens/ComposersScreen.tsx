@@ -28,12 +28,23 @@ import { useEffect, useState } from "react";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../RootStackParams";
 import { useNavigation } from "@react-navigation/native";
+import {
+  emptySearchComposerResults,
+  selecetIsSearchActive,
+  selectSearchComposerResults,
+  setSearchComposerResultsAsync,
+} from "../../redux/slicers/ui/uiSlice";
 
 export default function ComposersScreen() {
   const composers = useAppSelector(selectComposersPage);
   const dispatch = useAppDispatch();
 
   const [firstLoad, setfirstLoad] = useState(true);
+
+  // For searchBar
+  const [emptyString, setEmptyString] = useState(true);
+  const isSearchActive = useAppSelector(selecetIsSearchActive);
+  const searchResults = useAppSelector(selectSearchComposerResults);
 
   type composerScreenProp = NativeStackNavigationProp<
     RootStackParamList,
@@ -59,14 +70,21 @@ export default function ComposersScreen() {
       />
 
       <Text style={styles.overViewText}>Overview</Text>
-      <SearchBar placeholder="Search Composers" />
+      <SearchBar
+        placeholder="Search Composers"
+        setSearchResultsAsync={setSearchComposerResultsAsync}
+        emptySearchResults={emptySearchComposerResults}
+        setEmptyString={setEmptyString}
+      />
       <View style={styles.mainSection}>
         <Text style={globalStyles.vollkornHeadline}>
-          Composers by newest uploads
+          {isSearchActive && !emptyString
+            ? "Search Results"
+            : "Composers by newest uploads"}
         </Text>
         <FlatList
           style={{ marginLeft: -10, height: "100%" }}
-          data={composers}
+          data={isSearchActive && !emptyString ? searchResults : composers}
           renderItem={(composer) => (
             <ComposerCard
               composer={composer.item}

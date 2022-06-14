@@ -4,6 +4,7 @@ import { RootState, useAppDispatch } from "../../store";
 import {
   getSheetsAPICall,
   getSheetsByComposerAPICall,
+  searchComposersAPICall,
   searchSheetsAPICall,
 } from "../data/dataAPI";
 import { Composer, Sheet } from "../data/dataSlice";
@@ -13,7 +14,8 @@ interface UIState {
   detailedPreviewSheets: Sheet[] /* Sheets By Composer */;
   status: "idle" | "loading" | "failed";
   serverURL: string;
-  searchResults: Sheet[];
+  searchSheetResults: Sheet[];
+  searchComposerResults: Composer[];
   isSearchActive: boolean;
 }
 
@@ -22,7 +24,8 @@ const initialState: UIState = {
   detailedPreviewSheets: [],
   status: "idle",
   serverURL: "http://192.168.0.65:8080/api",
-  searchResults: [],
+  searchSheetResults: [],
+  searchComposerResults: [],
   isSearchActive: false,
 };
 
@@ -31,9 +34,14 @@ export const addDetailedPreviewAsync = createAsyncThunk(
   getSheetsByComposerAPICall
 );
 
-export const setSearchResultsAsync = createAsyncThunk(
+export const setSearchSheetResultsAsync = createAsyncThunk(
   "ui/setSearchResultsAsync",
   searchSheetsAPICall
+);
+
+export const setSearchComposerResultsAsync = createAsyncThunk(
+  "ui/setSearchComposerResultsAsync",
+  searchComposersAPICall
 );
 
 export const uiSlice = createSlice({
@@ -44,8 +52,11 @@ export const uiSlice = createSlice({
       axios.defaults.baseURL = action.payload;
       state.serverURL = action.payload;
     },
-    emptySearchResults: (state: UIState) => {
-      state.searchResults = [];
+    emptySearchSheetResults: (state: UIState) => {
+      state.searchSheetResults = [];
+    },
+    emptySearchComposerResults: (state: UIState) => {
+      state.searchComposerResults = [];
     },
     setIsSearchActive: (state: UIState, action: PayloadAction<boolean>) => {
       state.isSearchActive = action.payload;
@@ -64,20 +75,35 @@ export const uiSlice = createSlice({
         }
       })
 
-      .addCase(setSearchResultsAsync.pending, (state) => {
+      .addCase(setSearchSheetResultsAsync.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(setSearchResultsAsync.fulfilled, (state, action) => {
+      .addCase(setSearchSheetResultsAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.searchResults = action.payload;
+        state.searchSheetResults = action.payload;
+      })
+
+      .addCase(setSearchComposerResultsAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(setSearchComposerResultsAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.searchComposerResults = action.payload;
       });
   },
 });
 
-export const { setServerURL, emptySearchResults, setIsSearchActive } =
-  uiSlice.actions;
+export const {
+  setServerURL,
+  emptySearchSheetResults,
+  emptySearchComposerResults,
+  setIsSearchActive,
+} = uiSlice.actions;
 
-export const selectSearchResults = (state: RootState) => state.ui.searchResults;
+export const selectSearchComposerResults = (state: RootState) =>
+  state.ui.searchComposerResults;
+export const selectSearchSheetResults = (state: RootState) =>
+  state.ui.searchSheetResults;
 export const selecetIsSearchActive = (state: RootState) =>
   state.ui.isSearchActive;
 export const selectServerURL = (state: RootState) => state.ui.serverURL;

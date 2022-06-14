@@ -3,19 +3,18 @@ import React, { useEffect, useState } from "react";
 import { colors, globalStyles } from "../../constants/GlobalStyleSheet";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
-import {
-  emptySearchResults,
-  selectSearchResults,
-  setIsSearchActive,
-  setSearchResultsAsync,
-} from "../../redux/slicers/ui/uiSlice";
+import { setIsSearchActive } from "../../redux/slicers/ui/uiSlice";
 
 export default function SearchBar({
   placeholder,
   setEmptyString,
+  setSearchResultsAsync,
+  emptySearchResults,
 }: {
   placeholder?: string;
-  setEmptyString?: Function;
+  setEmptyString: Function;
+  setSearchResultsAsync: Function;
+  emptySearchResults: Function;
 }) {
   const [searchString, setSearchString] = useState("");
   const dispatch = useAppDispatch();
@@ -37,7 +36,7 @@ export default function SearchBar({
           setSearchString(searchString);
           if (searchString == "") {
             setEmptyString && setEmptyString(true);
-            dispatch(emptySearchResults());
+            dispatch(setSearchResultsAsync());
             return;
           }
           setEmptyString && setEmptyString(false);

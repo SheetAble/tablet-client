@@ -226,3 +226,36 @@ export async function searchSheetsAPICall(
     }
   }
 }
+
+export async function searchComposersAPICall(
+  searchValue: string
+): Promise<Composer[]> {
+  try {
+    const { data } = await axios.get<ComposerResponse[]>(
+      "/search/composers/" + searchValue
+    );
+
+    let composers: Composer[] = [];
+    for (let i = 0; i < data.length; i++) {
+      composers.push({
+        safeName: data[i].safe_name,
+        name: data[i].name,
+        portraitUrl: data[i].portrait_url,
+        epoch: data[i].epoch,
+        createdAt: data[i].created_at,
+        updatedAt: data[i].updated_at,
+      });
+    }
+
+    return composers;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.log("error message: ", error.message);
+      console.log(error.cause);
+      return [];
+    } else {
+      console.log("unexpected error: ", error);
+      return [];
+    }
+  }
+}

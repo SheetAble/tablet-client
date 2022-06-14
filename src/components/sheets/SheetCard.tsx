@@ -34,12 +34,9 @@ export default function SheetCard({
       onPressIn={() => {
         setIsPressed(true);
       }}
-      onLongPress={() => {
-        navigation.navigate("Sheet", sheet);
-      }}
-      delayLongPress={70}
       onPressOut={() => {
         setIsPressed(false);
+        navigation.navigate("Sheet", sheet);
       }}
     >
       <View

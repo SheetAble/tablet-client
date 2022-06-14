@@ -24,6 +24,7 @@ export default function RecentlyAddedComposers() {
             composer={composer}
             first={index == 0}
             key={composer.safeName}
+            isHomeFeed={true}
           />
         ))}
       </ScrollView>

@@ -22,8 +22,10 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { syncAll } from "../../utils/callMethods";
 import { useEffect, useState } from "react";
 import {
+  emptySearchSheetResults,
   selecetIsSearchActive,
-  selectSearchResults,
+  selectSearchSheetResults,
+  setSearchSheetResultsAsync,
 } from "../../redux/slicers/ui/uiSlice";
 
 export default function SheetsScreen() {
@@ -34,7 +36,7 @@ export default function SheetsScreen() {
   // For searchBar
   const [emptyString, setEmptyString] = useState(true);
   const isSearchActive = useAppSelector(selecetIsSearchActive);
-  const searchResults = useAppSelector(selectSearchResults);
+  const searchResults = useAppSelector(selectSearchSheetResults);
 
   useEffect(() => {
     if (sheets.length == 0 && firstLoad) {
@@ -54,11 +56,16 @@ export default function SheetsScreen() {
       />
 
       <Text style={styles.overViewText}>Overview</Text>
-      <SearchBar placeholder="Search Sheets" setEmptyString={setEmptyString} />
+      <SearchBar
+        placeholder="Search Sheets"
+        setEmptyString={setEmptyString}
+        setSearchResultsAsync={setSearchSheetResultsAsync}
+        emptySearchResults={emptySearchSheetResults}
+      />
       <View style={styles.mainSection}>
         <Text style={globalStyles.vollkornHeadline}>
           {isSearchActive && !emptyString
-            ? "Sheet Results"
+            ? "Search Results"
             : "Sheets by newest uploads"}
         </Text>
 

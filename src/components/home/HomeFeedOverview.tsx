@@ -9,8 +9,10 @@ import {
   selectSheets,
 } from "../../redux/slicers/data/dataSlice";
 import {
+  emptySearchSheetResults,
   selecetIsSearchActive,
-  selectSearchResults,
+  selectSearchSheetResults,
+  setSearchSheetResultsAsync,
 } from "../../redux/slicers/ui/uiSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { syncAll } from "../../utils/callMethods";
@@ -29,7 +31,7 @@ export default function HomeFeedOverview() {
   // For searchBar
   const [emptyString, setEmptyString] = useState(true);
   const isSearchActive = useAppSelector(selecetIsSearchActive);
-  const searchResults = useAppSelector(selectSearchResults);
+  const searchResults = useAppSelector(selectSearchSheetResults);
 
   useEffect(() => {
     if ((sheets.length == 0 || composers.length == 0) && firstLoad) {
@@ -51,6 +53,8 @@ export default function HomeFeedOverview() {
       <Text style={styles.overViewText}>Overview</Text>
       <SearchBar
         setEmptyString={setEmptyString}
+        setSearchResultsAsync={setSearchSheetResultsAsync}
+        emptySearchResults={emptySearchSheetResults}
         placeholder="Search for Sheets"
       />
       <ScrollView
