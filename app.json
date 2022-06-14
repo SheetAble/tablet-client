@@ -3,7 +3,7 @@
     "name": "SheetAble",
     "slug": "sheetable-tablet-client",
     "description": "The tablet-client for SheetAble servers",
-    "owner": "vallezw",
+    "owner": "sheetable",
     "githubUrl": "https://github.com/SheetAble/tablet-client",
     "version": "0.0.1",
     "orientation": "default",
