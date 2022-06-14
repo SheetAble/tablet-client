@@ -17,11 +17,9 @@ import { RootStackParamList } from "../../screens/RootStackParams";
 export default function SheetCard({
   sheet,
   first,
-  momentumScroll,
 }: {
   sheet: Sheet;
   first: boolean;
-  momentumScroll: boolean; // TODO: Redo this since its still not really good
 }) {
   // To remove shadow when button is pressed
   const [isPressed, setIsPressed] = useState(false);
@@ -36,11 +34,13 @@ export default function SheetCard({
       onPressIn={() => {
         setIsPressed(true);
       }}
-      onPressOut={() => {
-        setIsPressed(false);
+      onLongPress={() => {
         navigation.navigate("Sheet", sheet);
       }}
-      disabled={momentumScroll /* To not accidently press*/}
+      delayLongPress={70}
+      onPressOut={() => {
+        setIsPressed(false);
+      }}
     >
       <View
         style={[

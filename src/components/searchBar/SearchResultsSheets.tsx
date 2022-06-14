@@ -8,12 +8,7 @@ export default function SearchResultsSheets({ sheets }: { sheets: Sheet[] }) {
   return (
     <ScrollView horizontal={true} style={styles.sheetsList}>
       {sheets.map((sheet: Sheet, index: number) => (
-        <SheetCard
-          sheet={sheet}
-          first={index == 0}
-          momentumScroll={false}
-          key={sheet.safeSheetName}
-        />
+        <SheetCard sheet={sheet} first={index == 0} key={sheet.safeSheetName} />
       ))}
     </ScrollView>
   );

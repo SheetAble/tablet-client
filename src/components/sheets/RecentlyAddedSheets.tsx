@@ -8,23 +8,16 @@ import SheetCard from "./SheetCard";
 export default function RecentlyAddedSheets() {
   // Slice sheets to take only first 6
   const sheets = useAppSelector(selectSheets).slice(0, 6);
-  const [momentumScroll, setMomentumScroll] = useState(false);
   return (
     <View style={styles.mainSection}>
       <Text style={[globalStyles.vollkornHeadline, { marginLeft: 10 }]}>
         Recently Added Sheets
       </Text>
-      <ScrollView
-        horizontal={true}
-        style={styles.sheetsList}
-        onMomentumScrollBegin={() => setMomentumScroll(true)}
-        onMomentumScrollEnd={() => setMomentumScroll(false)}
-      >
+      <ScrollView horizontal={true} style={styles.sheetsList}>
         {sheets.map((sheet: Sheet, index: number) => (
           <SheetCard
             sheet={sheet}
             first={index == 0}
-            momentumScroll={momentumScroll}
             key={sheet.safeSheetName}
           />
         ))}
