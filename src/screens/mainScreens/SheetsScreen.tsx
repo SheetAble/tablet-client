@@ -21,11 +21,20 @@ import { useAppDispatch, useAppSelector } from "../../redux/store";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { syncAll } from "../../utils/callMethods";
 import { useEffect, useState } from "react";
+import {
+  selecetIsSearchActive,
+  selectSearchResults,
+} from "../../redux/slicers/ui/uiSlice";
 
 export default function SheetsScreen() {
   const sheets = useAppSelector(selectSheetsPage);
   const dispatch = useAppDispatch();
   const [firstLoad, setfirstLoad] = useState(true);
+
+  // For searchBar
+  const [emptyString, setEmptyString] = useState(true);
+  const isSearchActive = useAppSelector(selecetIsSearchActive);
+  const searchResults = useAppSelector(selectSearchResults);
 
   useEffect(() => {
     if (sheets.length == 0 && firstLoad) {
@@ -45,14 +54,17 @@ export default function SheetsScreen() {
       />
 
       <Text style={styles.overViewText}>Overview</Text>
-      <SearchBar placeholder="Search Sheets" />
+      <SearchBar placeholder="Search Sheets" setEmptyString={setEmptyString} />
       <View style={styles.mainSection}>
         <Text style={globalStyles.vollkornHeadline}>
-          Sheets by newest uploads
+          {isSearchActive && !emptyString
+            ? "Sheet Results"
+            : "Sheets by newest uploads"}
         </Text>
+
         <FlatList
           style={{ marginLeft: -10, height: "100%" }}
-          data={sheets}
+          data={isSearchActive && !emptyString ? searchResults : sheets}
           renderItem={(sheet) => (
             <SheetCard
               sheet={sheet.item}

@@ -23,13 +23,13 @@ export default function HomeFeedOverview() {
   const dispatch = useAppDispatch();
   const sheets = useAppSelector(selectSheets);
   const composers = useAppSelector(selectComposers);
-  const searchResults = useAppSelector(selectSearchResults);
-  const isSearchActive = useAppSelector(selecetIsSearchActive);
   // To dispatch only once when firstload is false
   const [firstLoad, setfirstLoad] = useState(true);
 
   // For searchBar
   const [emptyString, setEmptyString] = useState(true);
+  const isSearchActive = useAppSelector(selecetIsSearchActive);
+  const searchResults = useAppSelector(selectSearchResults);
 
   useEffect(() => {
     if ((sheets.length == 0 || composers.length == 0) && firstLoad) {
