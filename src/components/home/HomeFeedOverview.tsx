@@ -28,13 +28,15 @@ export default function HomeFeedOverview() {
   // To dispatch only once when firstload is false
   const [firstLoad, setfirstLoad] = useState(true);
 
+  // For searchBar
+  const [emptyString, setEmptyString] = useState(true);
+
   useEffect(() => {
     if ((sheets.length == 0 || composers.length == 0) && firstLoad) {
       dispatch(getSheetsAsync({}));
       dispatch(getComposersAsync({}));
       setfirstLoad(false);
     }
-    console.log(isSearchActive);
   });
 
   return (
@@ -47,7 +49,10 @@ export default function HomeFeedOverview() {
         }}
       />
       <Text style={styles.overViewText}>Overview</Text>
-      <SearchBar />
+      <SearchBar
+        setEmptyString={setEmptyString}
+        placeholder="Search for Sheets"
+      />
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{
@@ -55,7 +60,7 @@ export default function HomeFeedOverview() {
           marginRight: -20 /* For the shadow of the cards*/,
         }}
       >
-        {isSearchActive ? (
+        {isSearchActive && !emptyString ? (
           <SearchResultsSheets sheets={searchResults} />
         ) : (
           <>

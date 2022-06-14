@@ -10,10 +10,15 @@ import {
   setSearchResultsAsync,
 } from "../../redux/slicers/ui/uiSlice";
 
-export default function SearchBar({ placeholder }: { placeholder?: string }) {
+export default function SearchBar({
+  placeholder,
+  setEmptyString,
+}: {
+  placeholder?: string;
+  setEmptyString?: Function;
+}) {
   const [searchString, setSearchString] = useState("");
   const dispatch = useAppDispatch();
-  const searchResults = useAppSelector(selectSearchResults);
 
   return (
     <View style={styles.searchSection}>
@@ -31,18 +36,35 @@ export default function SearchBar({ placeholder }: { placeholder?: string }) {
         onChangeText={(searchString) => {
           setSearchString(searchString);
           if (searchString == "") {
+            setEmptyString && setEmptyString(true);
             dispatch(emptySearchResults());
             return;
           }
+          setEmptyString && setEmptyString(false);
           dispatch(setSearchResultsAsync(searchString));
         }}
         onBlur={() => {
-          dispatch(emptySearchResults());
-          dispatch(setIsSearchActive(false));
+          if (searchString == "") {
+            dispatch(emptySearchResults());
+            dispatch(setIsSearchActive(false));
+          }
         }}
         onFocus={() => dispatch(setIsSearchActive(true))}
         underlineColorAndroid="transparent"
         placeholderTextColor={colors.GRAY5}
+        value={searchString}
+      />
+      <Ionicons
+        name="close-outline"
+        size={22}
+        color={colors.GRAY7}
+        style={styles.searchIcon}
+        onPress={() => {
+          setSearchString("");
+          setEmptyString && setEmptyString(true);
+          dispatch(emptySearchResults());
+          dispatch(setIsSearchActive(false));
+        }}
       />
     </View>
   );
