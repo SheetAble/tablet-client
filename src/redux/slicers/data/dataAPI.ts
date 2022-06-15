@@ -1,7 +1,11 @@
 import axios, { AxiosError } from "axios";
+import {
+  transformComposerReponse,
+  transformSheetRepsonse,
+} from "../../../utils/apiMethods";
 import type { Composer, Sheet } from "./dataSlice";
 
-type SheetResponse = {
+export type SheetResponse = {
   safe_sheet_name: string;
   sheet_name: string;
   safe_composer: string;
@@ -23,7 +27,7 @@ type GetSheetsResponse = {
   rows: SheetResponse[];
 };
 
-type ComposerResponse = {
+export type ComposerResponse = {
   safe_name: string;
   name: string;
   portrait_url: string;
@@ -65,23 +69,7 @@ export async function getSheetsAPICall({
       },
     });
 
-    let sheets: Sheet[] = [];
-    for (let i = 0; i < data.rows.length; i++) {
-      sheets.push({
-        safeSheetName: data.rows[i].safe_sheet_name,
-        sheetName: data.rows[i].sheet_name,
-        safeComposer: data.rows[i].safe_composer,
-        composer: data.rows[i].composer,
-        releaseDate: data.rows[i].ReleaseDate,
-        pdfUrl: data.rows[i].pdf_url,
-        uploaderId: data.rows[i].uploader_id,
-        createdAt: data.rows[i].created_at,
-        updatedAt: data.rows[i].updated_at,
-        tags: data.rows[i].tags,
-        informationText: data.rows[i].information_text,
-      });
-    }
-    return sheets;
+    return transformSheetRepsonse(data.rows);
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.log("error message: ", error.message);
@@ -113,22 +101,7 @@ export async function getSheetsByComposerAPICall(
       },
     });
 
-    let sheets: Sheet[] = [];
-    for (let i = 0; i < data.rows.length; i++) {
-      sheets.push({
-        safeSheetName: data.rows[i].safe_sheet_name,
-        sheetName: data.rows[i].sheet_name,
-        safeComposer: data.rows[i].safe_composer,
-        composer: data.rows[i].composer,
-        releaseDate: data.rows[i].ReleaseDate,
-        pdfUrl: data.rows[i].pdf_url,
-        uploaderId: data.rows[i].uploader_id,
-        createdAt: data.rows[i].created_at,
-        updatedAt: data.rows[i].updated_at,
-        tags: data.rows[i].tags,
-        informationText: data.rows[i].information_text,
-      });
-    }
+    const sheets = transformSheetRepsonse(data.rows);
     return { sheets, composer };
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -167,18 +140,7 @@ export async function getComposersAPICall({
       }
     );
 
-    let composers: Composer[] = [];
-    for (let i = 0; i < data.rows.length; i++) {
-      composers.push({
-        safeName: data.rows[i].safe_name,
-        name: data.rows[i].name,
-        portraitUrl: data.rows[i].portrait_url,
-        epoch: data.rows[i].epoch,
-        createdAt: data.rows[i].created_at,
-        updatedAt: data.rows[i].updated_at,
-      });
-    }
-    return composers;
+    return transformComposerReponse(data.rows);
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.log("error message: ", error.message);
@@ -197,24 +159,7 @@ export async function searchSheetsAPICall(
   try {
     const { data } = await axios.get<SheetResponse[]>("/search/" + searchValue);
 
-    let sheets: Sheet[] = [];
-    for (let i = 0; i < data.length; i++) {
-      sheets.push({
-        safeSheetName: data[i].safe_sheet_name,
-        sheetName: data[i].sheet_name,
-        safeComposer: data[i].safe_composer,
-        composer: data[i].composer,
-        releaseDate: data[i].ReleaseDate,
-        pdfUrl: data[i].pdf_url,
-        uploaderId: data[i].uploader_id,
-        createdAt: data[i].created_at,
-        updatedAt: data[i].updated_at,
-        tags: data[i].tags,
-        informationText: data[i].information_text,
-      });
-    }
-
-    return sheets;
+    return transformSheetRepsonse(data);
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.log("error message: ", error.message);
@@ -235,19 +180,7 @@ export async function searchComposersAPICall(
       "/search/composers/" + searchValue
     );
 
-    let composers: Composer[] = [];
-    for (let i = 0; i < data.length; i++) {
-      composers.push({
-        safeName: data[i].safe_name,
-        name: data[i].name,
-        portraitUrl: data[i].portrait_url,
-        epoch: data[i].epoch,
-        createdAt: data[i].created_at,
-        updatedAt: data[i].updated_at,
-      });
-    }
-
-    return composers;
+    return transformComposerReponse(data);
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.log("error message: ", error.message);
