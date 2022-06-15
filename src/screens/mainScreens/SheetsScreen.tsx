@@ -27,6 +27,7 @@ import {
   selectSearchSheetResults,
   setSearchSheetResultsAsync,
 } from "../../redux/slicers/ui/uiSlice";
+import NothingAvailalbe from "../../components/utils/NothingAvailable";
 
 export default function SheetsScreen() {
   const sheets = useAppSelector(selectSheetsPage);
@@ -45,7 +46,9 @@ export default function SheetsScreen() {
     }
   });
 
-  return (
+  return sheets.length == 0 ? (
+    <NothingAvailalbe content="Sheets" />
+  ) : (
     <View style={styles.mainWrapper}>
       <Ionicons
         name="sync"

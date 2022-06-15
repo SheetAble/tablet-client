@@ -34,6 +34,7 @@ import {
   selectSearchComposerResults,
   setSearchComposerResultsAsync,
 } from "../../redux/slicers/ui/uiSlice";
+import NothingAvailalbe from "../../components/utils/NothingAvailable";
 
 export default function ComposersScreen() {
   const composers = useAppSelector(selectComposersPage);
@@ -59,7 +60,9 @@ export default function ComposersScreen() {
     }
   });
 
-  return (
+  return composers.length == 0 ? (
+    <NothingAvailalbe content="Composers" />
+  ) : (
     <View style={styles.mainWrapper}>
       <Ionicons
         name="sync"

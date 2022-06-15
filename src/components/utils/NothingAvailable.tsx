@@ -5,7 +5,11 @@ import { syncAll } from "../../utils/callMethods";
 import { useAppDispatch } from "../../redux/store";
 import { colors, globalStyles } from "../../constants/GlobalStyleSheet";
 
-export default function NoSheetsAvailalbe() {
+export default function NothingAvailalbe({
+  content,
+}: {
+  content: string /* What is not available*/;
+}) {
   const dispatch = useAppDispatch();
 
   return (
@@ -17,13 +21,14 @@ export default function NoSheetsAvailalbe() {
           onPress={() => {
             syncAll(dispatch);
           }}
+          style={{ zIndex: 2 }}
         />
         <View style={styles.mainContainer}>
-          <Text style={styles.textStyle}>No Sheets available</Text>
+          <Text style={styles.textStyle}>No {content} available</Text>
           <Text style={styles.subTextStyle}>
             Upload some to the server to get started
           </Text>
-          <View style={styles.imgContainer}>
+          <View>
             <Image
               style={styles.imgStyle}
               source={require("../../../assets/images/NotFound.png")}
