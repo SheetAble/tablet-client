@@ -1,4 +1,11 @@
-import { View, Text, StyleSheet, Pressable, Button } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  Button,
+  TouchableOpacity,
+} from "react-native";
 import React, { useState } from "react";
 import { TextInput } from "react-native-gesture-handler";
 import { colors, globalStyles } from "../../constants/GlobalStyleSheet";
@@ -33,16 +40,19 @@ export default function SetBaseServerURLModal({
           value={serverURLValue}
           onChangeText={(val) => setServerURLValue(val)}
         />
-        <View style={styles.buttonContainer}>
-          <Button
-            title="Save"
-            onPress={() => {
-              dispatch(setServerURL(serverURLValue + "/api"));
-              setServerSettingsModalShow(false);
-            }}
-            color="white"
-          />
-        </View>
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          onPress={() => {
+            dispatch(setServerURL(serverURLValue + "/api"));
+            setServerSettingsModalShow(false);
+          }}
+        >
+          <Text
+            style={{ ...globalStyles.nunitoSansSubheadline, color: "white" }}
+          >
+            Save
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -92,7 +102,7 @@ const styles = StyleSheet.create({
     fontFamily: "NunitoSans_400Regular",
     borderRadius: 8,
     fontSize: 20,
-    color: colors.GRAY7,
+    color: colors.GRAY3,
   },
   buttonContainer: {
     backgroundColor: colors.BLUE7,
