@@ -3,6 +3,7 @@ import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Button, Text, SafeAreaView, StyleSheet, View } from "react-native";
 import DetailedPreview from "../../components/home/DetailedPreview";
 import HomeFeedOverview from "../../components/home/HomeFeedOverview";
+import NoSheetsAvailalbe from "../../components/noSheetsAvailable/NoSheetsAvailalbe";
 import { colors, globalStyles } from "../../constants/GlobalStyleSheet";
 import { selectData } from "../../redux/slicers/data/dataSlice";
 import { useAppSelector } from "../../redux/store";
@@ -14,7 +15,7 @@ export default function HomeScreen() {
   const navigation = useNavigation<homeScreenProp>();
   const data = useAppSelector(selectData);
 
-  if (data.composers && data.sheets) {
+  if (data.composers.length != 0 && data.sheets.length != 0) {
     return (
       <View style={styles.mainWrapper}>
         <View style={styles.margin}>
@@ -24,7 +25,7 @@ export default function HomeScreen() {
       </View>
     );
   }
-  return <Text>loading</Text>;
+  return <NoSheetsAvailalbe />;
 }
 
 const styles = StyleSheet.create({
