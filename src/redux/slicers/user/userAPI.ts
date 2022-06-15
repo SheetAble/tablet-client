@@ -1,11 +1,17 @@
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 
-export async function loginAPICall() {
+export async function loginAPICall({
+  email,
+  password,
+}: {
+  email: string;
+  password: string;
+}) {
   try {
     const { data, status } = await axios.post<string>("/login", {
-      email: "admin@admin.com",
-      password: "sheetable",
+      email: email,
+      password: password,
     });
 
     if (status != 200) {

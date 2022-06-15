@@ -14,15 +14,22 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../RootStackParams";
 import { useDispatch } from "react-redux";
-import { loginAsync } from "../../redux/slicers/user/userSlice";
-import { useAppDispatch } from "../../redux/store";
+import {
+  loginAsync,
+  selectLoginError,
+} from "../../redux/slicers/user/userSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { isLandscape } from "../../utils/rnMethods";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import SetBaseServerURLModal from "../../components/modals/SetBaseServerURLModal";
+import { syncAll } from "../../utils/callMethods";
 
 export default function SignInScreen() {
   const dispatch = useAppDispatch();
   const [serverSettingsModalShow, setServerSettingsModalShow] = useState(false);
+  const error = useAppSelector(selectLoginError);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
@@ -60,6 +67,8 @@ export default function SignInScreen() {
             keyboardType="email-address"
             autoComplete="email"
             textContentType="emailAddress"
+            value={email}
+            onChangeText={(val: string) => setEmail(val)}
           />
           <TextInput
             style={[styles.textInput, { marginTop: 20 }]}
@@ -68,13 +77,26 @@ export default function SignInScreen() {
             autoComplete="password"
             textContentType="password"
             secureTextEntry={true}
+            value={password}
+            onChangeText={(val: string) => setPassword(val)}
           />
-          <TouchableOpacity onPress={() => {}}>
-            <Text style={styles.recoverPassword}>Recover Password</Text>
-          </TouchableOpacity>
+          <View style={styles.belowContainer}>
+            <Text style={styles.errorText}>{error ? "Login Failed" : ""}</Text>
+            <TouchableOpacity onPress={() => {}}>
+              <Text style={styles.recoverPassword}>Recover Password</Text>
+            </TouchableOpacity>
+          </View>
           <TouchableOpacity
             style={styles.signInButton}
-            onPress={() => dispatch(loginAsync())}
+            onPress={() => {
+              dispatch(
+                loginAsync({
+                  email: email,
+                  password: password,
+                })
+              );
+              syncAll(dispatch);
+            }}
           >
             <Text style={styles.signInButtonText}>Sign In</Text>
           </TouchableOpacity>
@@ -107,6 +129,15 @@ const styles = StyleSheet.create({
     lineHeight: 50,
     marginTop: -10,
   },
+  errorText: {
+    ...globalStyles.nunitoSansBodyBold,
+    marginTop: 10,
+    color: colors.RED3,
+  },
+  belowContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
   textInput: {
     alignSelf: "center",
     marginTop: 30,
@@ -118,7 +149,7 @@ const styles = StyleSheet.create({
     fontFamily: "NunitoSans_400Regular",
     borderRadius: 8,
     fontSize: 20,
-    color: colors.GRAY7,
+    color: colors.GRAY3,
   },
   recoverPassword: {
     ...globalStyles.nunitoSansBodyBold,
