@@ -7,10 +7,10 @@
     "githubUrl": "https://github.com/SheetAble/tablet-client",
     "version": "0.0.1",
     "orientation": "default",
-    "icon": "./assets/LogoPNG.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/SplashScreen.png",
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
