@@ -1,4 +1,4 @@
-package net.sheetable.tabletclient.newarchitecture;
+package com.sheetable.tabletclt.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.EmptyReactNativeConfig;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import net.sheetable.tabletclient.BuildConfig;
-import net.sheetable.tabletclient.newarchitecture.components.MainComponentsRegistry;
-import net.sheetable.tabletclient.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.sheetable.tabletclt.BuildConfig;
+import com.sheetable.tabletclt.newarchitecture.components.MainComponentsRegistry;
+import com.sheetable.tabletclt.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

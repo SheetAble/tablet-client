@@ -1,4 +1,4 @@
-package net.sheetable.tabletclient.newarchitecture.modules;
+package com.sheetable.tabletclt.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;

@@ -1,4 +1,4 @@
-package net.sheetable.tabletclient.newarchitecture.components;
+package com.sheetable.tabletclt.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;

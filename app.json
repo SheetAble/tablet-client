@@ -1,6 +1,8 @@
 {
+  "displayName": "SheetAble",
   "expo": {
     "name": "SheetAble",
+    "sdkVersion": "45.0.0",
     "slug": "sheetable-tablet-client",
     "description": "The tablet-client for SheetAble servers",
     "owner": "sheetable",
@@ -21,14 +23,14 @@
     "ios": {
       "supportsTablet": true,
       "isTabletOnly": true,
-      "bundleIdentifier": "net.sheetable.tabletclient"
+      "bundleIdentifier": "com.sheetable.tabletclt"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "net.sheetable.tabletclient",
+      "package": "com.sheetable.tabletclt",
       "permissions": [
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE",

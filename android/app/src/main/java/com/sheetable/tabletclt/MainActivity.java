@@ -1,4 +1,4 @@
-package net.sheetable.tabletclient;
+package com.sheetable.tabletclt;
 
 import android.os.Build;
 import android.os.Bundle;
